@@ -1,0 +1,4 @@
+<div class="content">
+<img src="{{imgSource}}" [ngClass]="{'imgZoom' : this.buttonClick === 1}">
+<button (click)="startGif()" [ngClass]="{'iniButton' : this.buttonClick === 0,'hideIniButton' : this.buttonClick === 1}">Iniciar</button>
+</div>
