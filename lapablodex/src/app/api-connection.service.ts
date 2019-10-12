@@ -24,6 +24,10 @@ export class ApiConnectionService {
       .pipe(catchError(this.handleError));
   }
 
+  getEspecificPoke(name : string) {
+    return this.http.get(this.baseURL + '/APIget/name/' + name);
+  }
+
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.

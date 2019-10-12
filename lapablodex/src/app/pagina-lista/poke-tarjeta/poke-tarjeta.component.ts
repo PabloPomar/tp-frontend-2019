@@ -19,7 +19,7 @@ import {animate, state, style, transition, trigger} from "@angular/animations";
         backgroundColor: '#E6E6E6',
         width: '600px',
         height: '200px',
-        transform: ' translate(200px)',
+        transform: ' translate(300px)',
         'border-style': 'solid',
         'border-color': '#FFFF00'
       })),
@@ -55,8 +55,9 @@ export class PokeTarjetaComponent implements OnInit {
     return new Promise(resolve => {
       setTimeout(() => {
         resolve('I promise to return after second!');
-      }, 500);
+      }, 1000);
     });
   }
+
 
 }

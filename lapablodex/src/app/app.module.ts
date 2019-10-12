@@ -13,6 +13,7 @@ import { PaginaListaComponent } from './pagina-lista/pagina-lista.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import { PokeTarjetaComponent } from './pagina-lista/poke-tarjeta/poke-tarjeta.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PokeDetalleComponent } from './poke-detalle/poke-detalle.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     PaginaPrincipalComponent,
     DexGifComponent,
     PaginaListaComponent,
-    PokeTarjetaComponent
+    PokeTarjetaComponent,
+    PokeDetalleComponent
   ],
   imports: [
     BrowserModule,

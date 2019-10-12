@@ -1,8 +1,14 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+      crossorigin="anonymous">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
 <div [@changeDivSize]=currentState>
   <p class="pStyler">
     <img src="{{pokemon.img}}" class="imgStyler">
     Nro: {{pokemon.id}}  nombre: {{pokemon.name}} <br>
-    Tipo : Planta / veneno <br>
-    <span style="font-size: 10px">Descripcion : El primer Pokemon </span>
+    Tipo : {{pokemon.type[0]}} / {{pokemon.type[1]}} <br>
+    <span style="font-size: 10px">Descripcion : {{pokemon.description}} </span> <br>
+    <a class="btn btn-secondary" ><i class="fa fa-search fa-lg"></i></a>
   </p>
 </div>

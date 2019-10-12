@@ -1,5 +1,17 @@
 <div class="backgrounded">
   <h2>Listado</h2>
+  <form>
+    <select name="sorter" [(ngModel)]="sorterValue" >
+      <option value="id">Sort by ID</option>
+      <option value="name" >Sort by Name</option>
+    </select>
+    <button (click)="this.sortPage()">Sort</button>
+  </form>
+  <form>
+    <input type="text" name="sercher" [(ngModel)]="search" >
+    <button (click)="this.searchName()">Buscar</button>
+  </form>
+
   <div *ngFor="let pokemon of pokemons">
     <app-poke-tarjeta [pokemon]="pokemon"></app-poke-tarjeta>
   </div>
