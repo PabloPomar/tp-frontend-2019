@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {animate, state, style, transition, trigger} from "@angular/animations";
-
+import {Router, RouterModule, Routes} from '@angular/router';
 @Component({
   selector: 'app-poke-tarjeta',
   templateUrl: './poke-tarjeta.component.html',
@@ -34,11 +34,12 @@ export class PokeTarjetaComponent implements OnInit {
 
   @Input() pokemon : any;
 
+
   changeState() {
     this.currentState = this.currentState === 'initial' ? 'final' : 'initial';
   }
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
     this.pageLoad();
@@ -60,4 +61,7 @@ export class PokeTarjetaComponent implements OnInit {
   }
 
 
+  aVerDetalle(id : string) {
+    this.router.navigate(['detalle/' + id]);
+  }
 }

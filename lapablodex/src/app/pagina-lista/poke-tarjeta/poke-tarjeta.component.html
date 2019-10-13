@@ -9,6 +9,6 @@
     Nro: {{pokemon.id}}  nombre: {{pokemon.name}} <br>
     Tipo : {{pokemon.type[0]}} / {{pokemon.type[1]}} <br>
     <span style="font-size: 10px">Descripcion : {{pokemon.description}} </span> <br>
-    <a class="btn btn-secondary" ><i class="fa fa-search fa-lg"></i></a>
+    <a class="btn btn-secondary" (click)="aVerDetalle(pokemon._id)"><i class="fa fa-search fa-lg"></i></a>
   </p>
 </div>

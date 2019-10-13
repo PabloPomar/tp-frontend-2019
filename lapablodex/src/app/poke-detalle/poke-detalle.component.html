@@ -1,0 +1,115 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+      crossorigin="anonymous">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<div *ngIf="isLoaded == 1" class="diviser">
+  <button (click)="aListado()" class="volverButton">Volver</button>
+  <div class="diviser2">
+  <p class="pStyler">
+    <img src="{{pokemon?.img}}" class="imgStyler">
+    Nro: {{pokemon?.id}} <br>
+    Nombre: {{pokemon.name}} <br>
+    Clasificacion: {{pokemon?.misc.classification}} <br>
+    Tipo : {{pokemon?.type[0]}} / {{pokemon.type[1]}} <br>
+    Habilidad: {{pokemon?.misc.abilities.normal}}. <br>
+    Hab. Oculta: {{pokemon?.misc.abilities.hidden}}. <br>
+    Descripcion:
+  </p>
+    <form>
+      <textarea  [(ngModel)]="pokemon.description" name="description" value="{{pokemon.description}}" rows="4" class="textAreaStyler"></textarea>
+      <button (click)="editarDesc()" class="button2">Editar</button>
+    </form>
+  </div>
+
+  <h2 class="h2Styler">Estadisticas Base</h2>
+  <table class="greenTable">
+    <thead>
+    <tr>
+      <th>HP</th>
+      <th>Ataque</th>
+      <th>Defensa</th>
+      <th>Atq.Esp.</th>
+      <th>Def.Esp.</th>
+      <th>Velocidad</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>{{pokemon?.stats.hp}}</td>
+      <td>{{pokemon?.stats.attack}}</td>
+      <td>{{pokemon?.stats.defense}}</td>
+      <td>{{pokemon?.stats.spattack}}</td>
+      <td>{{pokemon?.stats.spdefense}}</td>
+      <td>{{pokemon?.stats.speed}}</td>
+    </tr>
+    </tbody>
+  </table>
+
+
+  <h2 class="h2Styler">Efectividad elemental</h2>
+
+  <table class="steelBlueCols">
+    <thead>
+    <tr>
+      <th>Normal</th>
+      <th>Fuego</th>
+      <th>Agua</th>
+      <th>Electricidad</th>
+      <th>Planta</th>
+      <th>Hielo</th>
+      <th>Lucha</th>
+      <th>Veneno</th>
+      <th>Tierra</th>
+      <th>Volador</th>
+      <th>Psiquico</th>
+      <th>Bicho</th>
+      <th>Roca</th>
+      <th>Fantasma</th>
+      <th>Dragon</th>
+      <th>Siniestro</th>
+      <th>Acero</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>*{{pokemon?.damages.normal}}</td>
+      <td>*{{pokemon?.damages.fire}}</td>
+      <td>*{{pokemon?.damages.water}}</td>
+      <td>*{{pokemon?.damages.electric}}</td>
+      <td>*{{pokemon?.damages.grass}}</td>
+      <td>*{{pokemon?.damages.ice}}</td>
+      <td>*{{pokemon?.damages.fight}}</td>
+      <td>*{{pokemon?.damages.poison}}</td>
+      <td>*{{pokemon?.damages.ground}}</td>
+      <td>*{{pokemon?.damages.flying}}</td>
+      <td>*{{pokemon?.damages.psychic}}</td>
+      <td>*{{pokemon?.damages.bug}}</td>
+      <td>*{{pokemon?.damages.rock}}</td>
+      <td>*{{pokemon?.damages.ghost}}</td>
+      <td>*{{pokemon?.damages.dragon}}</td>
+      <td>*{{pokemon?.damages.dark}}</td>
+      <td>*{{pokemon?.damages.steel}}</td>
+    </tr>
+    </tbody>
+  </table>
+
+
+  <h2 class="h2Styler">Movimientos</h2>
+  <table class="whiteTable">
+    <thead>
+    <tr>
+      <th>Nivel</th>
+      <th>Nombre</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let move of pokemon.moves.level">
+      <td>{{move.learnedat}}</td>
+      <td>{{move.name}}</td>
+    </tr>
+    </tbody>
+  </table>
+
+
+
+
+</div>

@@ -24,8 +24,18 @@ export class ApiConnectionService {
       .pipe(catchError(this.handleError));
   }
 
+  postDescriptionById(poke : any) {
+    console.log(poke);
+    return this.http.post<any>(this.baseURL+'/APIpost/updateDescription2', poke)
+      .pipe(catchError(this.handleError));
+  }
+
   getEspecificPoke(name : string) {
     return this.http.get(this.baseURL + '/APIget/name/' + name);
+  }
+
+  getEspecificPokeByID(id : string) {
+    return this.http.get(this.baseURL + '/APIget/find/' + id);
   }
 
   private handleError(error: HttpErrorResponse) {

@@ -1,18 +1,19 @@
 <div class="backgrounded">
-  <h2>Listado</h2>
+  <img src="../../assets/img/listado.png" height="129" width="335" class="imgCenter">
+  <div align="center" style="padding: 24px 24px;">
   <form>
-    <select name="sorter" [(ngModel)]="sorterValue" >
+    <select name="sorter" [(ngModel)]="sorterValue" class="boxStyler">
       <option value="id">Sort by ID</option>
       <option value="name" >Sort by Name</option>
     </select>
-    <button (click)="this.sortPage()">Sort</button>
+    <button (click)="this.sortPage()" class="button3">Sort</button>
   </form>
   <form>
-    <input type="text" name="sercher" [(ngModel)]="search" >
-    <button (click)="this.searchName()">Buscar</button>
+    <input type="text" name="sercher" [(ngModel)]="search"  class="boxStyler" >
+    <button (click)="this.searchName()" class="button3">Buscar</button>
   </form>
-
+  </div>
   <div *ngFor="let pokemon of pokemons">
-    <app-poke-tarjeta [pokemon]="pokemon"></app-poke-tarjeta>
+    <app-poke-tarjeta [pokemon]="pokemon"></app-poke-tarjeta> <br>
   </div>
 </div>
