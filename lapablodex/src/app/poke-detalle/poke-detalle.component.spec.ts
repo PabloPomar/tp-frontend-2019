@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PokeDetalleComponent } from './poke-detalle.component';
+import { RouterTestingModule } from '@angular/router/testing';
+import {HttpClientModule} from '@angular/common/http';
 
 describe('PokeDetalleComponent', () => {
   let component: PokeDetalleComponent;
@@ -8,7 +10,8 @@ describe('PokeDetalleComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PokeDetalleComponent ]
+      imports: [FormsModule, ReactiveFormsModule, RouterTestingModule, HttpClientModule],
+      declarations: [ PokeDetalleComponent ],
     })
     .compileComponents();
   }));

@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import { ActivatedRoute } from "@angular/router";
-import {ApiConnectionService} from "../api-connection.service";
+import { ActivatedRoute } from '@angular/router';
+import {ApiConnectionService} from '../api-connection.service';
 import {Router, RouterModule, Routes} from '@angular/router';
 
 @Component({
@@ -12,14 +12,14 @@ export class PokeDetalleComponent implements OnInit {
 
   identificador: string;
 
-  @Input() pokemon : any;
+  @Input() pokemon: any;
   isLoaded: number;
 
-  constructor(private route: ActivatedRoute , protected apiConnection : ApiConnectionService , private router: Router) { }
+  constructor(private route: ActivatedRoute , protected apiConnection: ApiConnectionService , private router: Router) { }
 
   ngOnInit() {
-    this.isLoaded= 0;
-    this.identificador = this.route.snapshot.paramMap.get("id");
+    this.isLoaded = 0;
+    this.identificador = this.route.snapshot.paramMap.get('id');
     this.apiConnection.getEspecificPokeByID(this.identificador).subscribe(
       (data) => {
         this.pokemon = data;
@@ -31,7 +31,7 @@ export class PokeDetalleComponent implements OnInit {
     );
   }
 
-  editarDesc(id : string) {
+  editarDesc() {
     this.apiConnection.postDescriptionById(this.pokemon).subscribe();
   }
 

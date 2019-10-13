@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ApiConnectionService} from "../api-connection.service";
+import {ApiConnectionService} from '../api-connection.service';
 
 @Component({
   selector: 'app-pagina-lista',
@@ -8,21 +8,25 @@ import {ApiConnectionService} from "../api-connection.service";
 })
 export class PaginaListaComponent implements OnInit {
 
-  sorterValue : string;
+  sorterValue: string;
 
-  private pokemons: any;
+  pokemons: any;
 
-  search : string;
+  search: string;
 
-  constructor(    protected apiConnection : ApiConnectionService) { }
+  isLoaded: number;
+
+  constructor(    protected apiConnection: ApiConnectionService) { }
 
   ngOnInit() {
-    this.sorterValue = "nada";
-    this.search= "nada";
+    this.isLoaded = 0;
+    this.sorterValue = 'nada';
+    this.search = 'nada';
     this.apiConnection.getPokemon().subscribe(
       (data) => {
         this.pokemons = data;
         this.sortById();
+        this.isLoaded = 1;
       },
       (error) => {
         console.error(error);
@@ -43,7 +47,7 @@ export class PaginaListaComponent implements OnInit {
   }
 
   sortPage() {
-    if(this.sorterValue =="name") {
+    if (this.sorterValue === 'name') {
       this.sortByName();
     } else {
       this.sortById();

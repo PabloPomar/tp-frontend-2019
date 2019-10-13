@@ -1,8 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ApiConnectionService} from "../api-connection.service";
-import {pokeModelBase} from "../pokemonBaseModel";
-import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
-
+import {ApiConnectionService} from '../api-connection.service';
+import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-post-test',
@@ -15,7 +14,7 @@ export class PostTestComponent implements OnInit {
 
 
   constructor(
-    protected apiConnection : ApiConnectionService , private fb: FormBuilder
+    protected apiConnection: ApiConnectionService , private fb: FormBuilder
   ) {
   }
 
@@ -23,7 +22,7 @@ export class PostTestComponent implements OnInit {
   ngOnInit() {this.pokeModel = this.fb.group({
       id: new FormControl(''),
       description: new FormControl('')
-  }) }
+  }); }
 
 
   updateDescrptiption() {

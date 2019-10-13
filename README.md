@@ -1,5 +1,7 @@
 # TP Frontend 2019
 
+Nombre: Pablo Pomar. Legajo:43655.
+
 ## 1 - Enunciado
 ### 1.1 - Desarrollo
 Crear un nuevo frontend para un sitio que brinde una api pública, utilizando:

@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {animate, state, style, transition, trigger} from "@angular/animations";
+import {animate, state, style, transition, trigger} from '@angular/animations';
 import {Router, RouterModule, Routes} from '@angular/router';
 @Component({
   selector: 'app-poke-tarjeta',
@@ -32,7 +32,7 @@ export class PokeTarjetaComponent implements OnInit {
 
   currentState = 'initial';
 
-  @Input() pokemon : any;
+  @Input() pokemon: any;
 
 
   changeState() {
@@ -61,7 +61,7 @@ export class PokeTarjetaComponent implements OnInit {
   }
 
 
-  aVerDetalle(id : string) {
+  aVerDetalle(id: string) {
     this.router.navigate(['detalle/' + id]);
   }
 }

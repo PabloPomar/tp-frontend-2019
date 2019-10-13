@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ApiConnectionService} from "../api-connection.service";
+import {ApiConnectionService} from '../api-connection.service';
 
 @Component({
   selector: 'app-lista-test',
@@ -7,11 +7,11 @@ import {ApiConnectionService} from "../api-connection.service";
   styleUrls: ['./lista-test.component.less']
 })
 export class ListaTestComponent implements OnInit {
-  private pokemons: any;
+  pokemons: any;
 
 
   constructor(
-    protected apiConnection : ApiConnectionService
+    protected apiConnection: ApiConnectionService
   ) { }
 
   ngOnInit() {

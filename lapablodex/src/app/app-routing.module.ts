@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
-import {RouterModule, Routes} from "@angular/router";
-import { ListaTestComponent} from "./lista-test/lista-test.component";
-import { PostTestComponent} from "./post-test/post-test.component";
+import {RouterModule, Routes} from '@angular/router';
+import { ListaTestComponent} from './lista-test/lista-test.component';
+import { PostTestComponent} from './post-test/post-test.component';
 import { PaginaPrincipalComponent } from './pagina-principal/pagina-principal.component';
 import { PaginaListaComponent } from './pagina-lista/pagina-lista.component';
 import { PokeDetalleComponent } from './poke-detalle/poke-detalle.component';

@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpErrorResponse} from "@angular/common/http";
-import {pokeModelBase} from "./pokemonBaseModel";
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
-import {throwError} from "rxjs";
+import {throwError} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -18,23 +17,23 @@ export class ApiConnectionService {
     return this.http.get(this.baseURL + '/APIget/lista');
   }
 
-  postDescription(poke : pokeModelBase) {
+  postDescription(poke: any) {
     console.log(poke);
-    return this.http.post<pokeModelBase>(this.baseURL+'/APIpost/updateDescription2', poke)
+    return this.http.post<any>(this.baseURL + '/APIpost/updateDescription2', poke)
       .pipe(catchError(this.handleError));
   }
 
-  postDescriptionById(poke : any) {
+  postDescriptionById(poke: any) {
     console.log(poke);
-    return this.http.post<any>(this.baseURL+'/APIpost/updateDescription2', poke)
+    return this.http.post<any>(this.baseURL + '/APIpost/updateDescription2', poke)
       .pipe(catchError(this.handleError));
   }
 
-  getEspecificPoke(name : string) {
+  getEspecificPoke(name: string) {
     return this.http.get(this.baseURL + '/APIget/name/' + name);
   }
 
-  getEspecificPokeByID(id : string) {
+  getEspecificPokeByID(id: string) {
     return this.http.get(this.baseURL + '/APIget/find/' + id);
   }
 
@@ -52,6 +51,6 @@ export class ApiConnectionService {
     // return an observable with a user-facing error message
     return throwError(
       'Something bad happened; please try again later.');
-  };
+  }
 
 }

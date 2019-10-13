@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { DexGifComponent } from './dex-gif/dex-gif.component';
 import { PaginaPrincipalComponent } from './pagina-principal.component';
+import {ApiConnectionService} from '../api-connection.service';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('PaginaPrincipalComponent', () => {
   let component: PaginaPrincipalComponent;
@@ -8,7 +10,9 @@ describe('PaginaPrincipalComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PaginaPrincipalComponent ]
+      imports: [RouterTestingModule],
+      declarations: [ PaginaPrincipalComponent  , DexGifComponent],
+      providers: [ApiConnectionService]
     })
     .compileComponents();
   }));

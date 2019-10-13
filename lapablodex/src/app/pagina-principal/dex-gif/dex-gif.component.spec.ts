@@ -1,14 +1,17 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { DexGifComponent } from './dex-gif.component';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('DexGifComponent', () => {
   let component: DexGifComponent;
   let fixture: ComponentFixture<DexGifComponent>;
 
+
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DexGifComponent ]
+      imports: [RouterTestingModule],
+      declarations: [ DexGifComponent]
     })
     .compileComponents();
   }));

@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import {HttpClientModule} from '@angular/common/http';
 import { PaginaListaComponent } from './pagina-lista.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterTestingModule } from '@angular/router/testing';
+import {PokeTarjetaComponent} from './poke-tarjeta/poke-tarjeta.component';
 
 describe('PaginaListaComponent', () => {
   let component: PaginaListaComponent;
@@ -8,7 +11,9 @@ describe('PaginaListaComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PaginaListaComponent ]
+      imports: [HttpClientModule, FormsModule, ReactiveFormsModule, RouterTestingModule],
+      declarations: [ PaginaListaComponent, PokeTarjetaComponent ]
+
     })
     .compileComponents();
   }));
