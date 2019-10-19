@@ -1,3 +1,14 @@
+#Tp de frontEnd para la Asignatura de TTADS 2019 de la UTN de rosario
+
+Alumno: Pablo Pomar Legajo: 43655
+
+#Requisitos para correr
+
+Utilizar la API encontrada en el siguiente enlace: https://github.com/PabloPomar/La_Poke_API
+
+
+
+
 # Lapablodex
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.6.
