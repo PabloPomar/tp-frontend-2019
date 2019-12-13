@@ -15,6 +15,7 @@ import { PokeTarjetaComponent } from './pagina-lista/poke-tarjeta/poke-tarjeta.c
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PokeDetalleComponent } from './poke-detalle/poke-detalle.component';
 import { RouterModule, Routes } from '@angular/router';
+import { RegistroDeUsuarioComponent } from './Systema-Login/registro-de-usuario/registro-de-usuario.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { RouterModule, Routes } from '@angular/router';
     DexGifComponent,
     PaginaListaComponent,
     PokeTarjetaComponent,
-    PokeDetalleComponent
+    PokeDetalleComponent,
+    RegistroDeUsuarioComponent
   ],
   imports: [
     BrowserModule,

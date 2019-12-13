@@ -5,6 +5,7 @@ import { PostTestComponent} from './post-test/post-test.component';
 import { PaginaPrincipalComponent } from './pagina-principal/pagina-principal.component';
 import { PaginaListaComponent } from './pagina-lista/pagina-lista.component';
 import { PokeDetalleComponent } from './poke-detalle/poke-detalle.component';
+import { RegistroDeUsuarioComponent } from './Systema-Login/registro-de-usuario/registro-de-usuario.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,10 @@ const routes: Routes = [
   {
     path: 'detalle/:id',
     component: PokeDetalleComponent
+  },
+  {
+    path: 'registro',
+    component: RegistroDeUsuarioComponent
   },
   {
     path: '**',
