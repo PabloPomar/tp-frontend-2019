@@ -6,6 +6,7 @@ import { PaginaPrincipalComponent } from './pagina-principal/pagina-principal.co
 import { PaginaListaComponent } from './pagina-lista/pagina-lista.component';
 import { PokeDetalleComponent } from './poke-detalle/poke-detalle.component';
 import { RegistroDeUsuarioComponent } from './Systema-Login/registro-de-usuario/registro-de-usuario.component';
+import { PaginaLoginComponent } from './Systema-Login/pagina-login/pagina-login.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,10 @@ const routes: Routes = [
   {
     path: 'registro',
     component: RegistroDeUsuarioComponent
+  },
+  {
+    path: 'pagina-login',
+    component: PaginaLoginComponent
   },
   {
     path: '**',

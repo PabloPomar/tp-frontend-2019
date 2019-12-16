@@ -16,6 +16,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PokeDetalleComponent } from './poke-detalle/poke-detalle.component';
 import { RouterModule, Routes } from '@angular/router';
 import { RegistroDeUsuarioComponent } from './Systema-Login/registro-de-usuario/registro-de-usuario.component';
+import { PaginaLoginComponent } from './Systema-Login/pagina-login/pagina-login.component';
+import { LoginGoogleComponent } from './Systema-Login/pagina-login/login-google/login-google.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { RegistroDeUsuarioComponent } from './Systema-Login/registro-de-usuario/
     PaginaListaComponent,
     PokeTarjetaComponent,
     PokeDetalleComponent,
-    RegistroDeUsuarioComponent
+    RegistroDeUsuarioComponent,
+    PaginaLoginComponent,
+    LoginGoogleComponent
   ],
   imports: [
     BrowserModule,

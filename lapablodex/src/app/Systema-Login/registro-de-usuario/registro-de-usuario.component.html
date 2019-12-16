@@ -1,0 +1,46 @@
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+<div class="image">
+
+
+  <h1 style="font-family: Consolas; font-size: 25px; text-align: center">Registro de Usuario</h1>
+  <form class="form-1" [formGroup]="estiloForm" (ngSubmit)="onSubmit()">
+    <label>Usuario:</label>
+    <input type="text" formControlName="usuario">
+    <label>contraseña:</label>
+    <input type="password" formControlName="password" (ngModelChange)="check(estiloForm)">
+    <label>Confirmar contraseña:</label>
+    <input type="password" formControlName="rePassword" (ngModelChange)="check(estiloForm)">
+    <span [ngClass]="{'invalid-pass' : this.longitud === 0,'valid-pass' : this.longitud === 1}">Debe tener 8 caracteres o mas...</span>
+    <i [ngClass]="{'fa fa-times' : this.longitud === 0}"></i>
+    <i  [ngClass]="{'fa fa-check' : this.longitud === 1}"></i>
+    <br>
+    <span [ngClass]="{'invalid-pass' : this.mayus === 0,'valid-pass' : this.mayus === 1}">Debe tener mayuscula...</span>
+    <i [ngClass]="{'fa fa-times' : this.mayus === 0}"></i>
+    <i  [ngClass]="{'fa fa-check' : this.mayus === 1}"></i>
+    <br>
+    <span [ngClass]="{'invalid-pass' : this.minus === 0,'valid-pass' : this.minus === 1}">Debe tener minuscula...</span>
+    <i [ngClass]="{'fa fa-times' : this.minus === 0}"></i>
+    <i  [ngClass]="{'fa fa-check' : this.minus === 1}"></i>
+    <br>
+    <span [ngClass]="{'invalid-pass' : this.tieneNum === 0,'valid-pass' : this.tieneNum === 1}">Debe tener numero...</span>
+    <i [ngClass]="{'fa fa-times' : this.tieneNum === 0}"></i>
+    <i  [ngClass]="{'fa fa-check' : this.tieneNum === 1}"></i>
+    <!--
+    <br>
+    <span [ngClass]="{'invalid-pass' : this.tieneSimbol === 0,'valid-pass' : this.tieneSimbol === 1}">Debe tener symbolos...</span>
+    <i [ngClass]="{'fa fa-times' : this.tieneSimbol === 0}"></i>
+    <i  [ngClass]="{'fa fa-check' : this.tieneSimbol === 1}"></i>
+       -->
+    <br>
+    <span [ngClass]="{'invalid-pass' : this.tieneMismaPassword === 0,'valid-pass' : this.tieneMismaPassword === 1}">Deben coincidir las contraseñas...</span>
+    <i [ngClass]="{'fa fa-times' : this.tieneMismaPassword === 0}"></i>
+    <i  [ngClass]="{'fa fa-check' : this.tieneMismaPassword === 1}"></i>
+    <br>
+    <label>Nota: No puede contener Ñ</label>
+    <br>
+    <button type="submit" [disabled]="estiloForm.invalid">Registrar</button>
+
+
+  </form>
+
+</div>

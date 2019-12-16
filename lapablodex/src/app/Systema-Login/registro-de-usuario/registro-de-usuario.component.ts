@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import { ApiLoginService} from "../../api-login.service";
-import {ApiConnectionService} from "../../api-connection.service";
 import {UsuarioModel} from "../../usuario.model";
 
 @Component({
@@ -165,10 +164,10 @@ export class RegistroDeUsuarioComponent implements OnInit {
   }
 
   async onSubmit() {
-    console.log(this.estiloForm.value);
+    //console.log(this.estiloForm.value);
     this.usuario.usuario = this.estiloForm.get('usuario').value;
     this.usuario.password = this.estiloForm.get('password').value;
-    console.log(this.usuario);
+    //console.log(this.usuario);
 
     this.apiLogin.userExist(this.usuario.usuario).subscribe(
       (data) => {
