@@ -1,6 +1,14 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
       crossorigin="anonymous">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<div class="topright">
+  <button (click)="this.aLogin()" >Login</button>
+  <button (click)="this.logOut()" >LogOut</button>
+  <button (click)="this.aRegistrarUsuario()" >Registrar</button>
+</div>
+<div class="topleft" *ngIf="logged === 'true'">
+  <h3> loggeado como: {{this.username}}</h3>
+</div>
 <div *ngIf="isLoaded == 1" class="diviser">
   <button (click)="aListado()" class="volverButton">Volver</button>
   <div class="diviser2">
@@ -12,12 +20,25 @@
     Tipo : {{pokemon?.type[0]}} / {{pokemon.type[1]}} <br>
     Habilidad: {{pokemon?.misc.abilities.normal}}. <br>
     Hab. Oculta: {{pokemon?.misc.abilities.hidden}}. <br>
-    Descripcion:
+    Descripcion: {{pokemon.description}}
   </p>
-    <form>
-      <textarea  [(ngModel)]="pokemon.description" name="description" value="{{pokemon.description}}" rows="4" class="textAreaStyler"></textarea>
-      <button (click)="editarDesc()" class="button2">Editar</button>
-    </form>
+    <div *ngIf="this.tipoUser === 'admin'">
+      <form>
+        <textarea  [(ngModel)]="pokemon.description" name="description" value="{{pokemon.description}}" rows="4" class="textAreaStyler"></textarea>
+        <button (click)="editarDesc()" class="button2">Editar</button>
+      </form>
+    </div>
+  </div>
+  <form>
+    <select name="sorter" [(ngModel)]="sorterValue" class="boxStyler">
+      <option value="likes">Sort by Likes</option>
+      <option value="date" >Sort by Date</option>
+    </select>
+    <button (click)="this.sortPage()" class="button2">Sort</button>
+  </form>
+
+  <div *ngFor="let descriptions of descripciones_usuarios">
+    <app-poke-user-description [user_description]="descriptions"></app-poke-user-description>
   </div>
 
   <h2 class="h2Styler">Estadisticas Base</h2>

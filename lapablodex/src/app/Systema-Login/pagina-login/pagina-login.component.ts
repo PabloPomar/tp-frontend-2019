@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {UsuarioModel} from "../../usuario.model";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import { ApiLoginService} from "../../api-login.service";
-
+import {Router, RouterModule, Routes} from '@angular/router';
 
 @Component({
   selector: 'app-pagina-login',
@@ -21,7 +21,7 @@ export class PaginaLoginComponent implements OnInit {
     password: new FormControl('' , [Validators.required])
   });
 
-  constructor( protected apiLogin: ApiLoginService) {
+  constructor( protected apiLogin: ApiLoginService , private router: Router) {
     this.isUserLoggedIn = false;
   }
 
@@ -63,6 +63,7 @@ export class PaginaLoginComponent implements OnInit {
             }
           )
           alert("El usuario es correcto y se a logeado como:" + localStorage.getItem('currentUser'));
+          this.router.navigate(['listado']);
         }
         else {
           alert("El usuario o la contraseña son incorrectos");
@@ -73,8 +74,16 @@ export class PaginaLoginComponent implements OnInit {
       }
     );
 
+
+
   }
 
+  aListado() {
+    this.router.navigate(['listado']);
+  }
 
+  aRegistrarUsuario() {
+    this.router.navigate(['registro-Usuario']);
+  }
 
 }

@@ -18,6 +18,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { RegistroDeUsuarioComponent } from './Systema-Login/registro-de-usuario/registro-de-usuario.component';
 import { PaginaLoginComponent } from './Systema-Login/pagina-login/pagina-login.component';
 import { LoginGoogleComponent } from './Systema-Login/pagina-login/login-google/login-google.component';
+import { PokeUserDescriptionComponent } from './poke-detalle/poke-user-description/poke-user-description.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { LoginGoogleComponent } from './Systema-Login/pagina-login/login-google/
     PokeDetalleComponent,
     RegistroDeUsuarioComponent,
     PaginaLoginComponent,
-    LoginGoogleComponent
+    LoginGoogleComponent,
+    PokeUserDescriptionComponent
   ],
   imports: [
     BrowserModule,

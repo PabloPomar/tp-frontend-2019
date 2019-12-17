@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import {Router, RouterModule, Routes} from '@angular/router';
 
 @Component({
   selector: 'app-login-google',
@@ -11,7 +12,7 @@ export class LoginGoogleComponent implements OnInit {
 
   @ViewChild('loginRef', {static: true }) loginElement: ElementRef;
 
-  constructor() { }
+  constructor( private router: Router) { }
 
   ngOnInit() {
 
@@ -32,10 +33,10 @@ export class LoginGoogleComponent implements OnInit {
         console.log('Email: ' + profile.getEmail()); */
         // YOUR CODE HERE
         localStorage.setItem('currentUser', profile.getName());
-        //alert("El usuario es de google y se a logeado como:" + localStorage.getItem('currentUser'));
+        alert("Se a logeado como:" + localStorage.getItem('currentUser'));
         localStorage.setItem('tipoUser', 'usuario');
+        localStorage.setItem('isLogedIn', 'true');
         //alert("Tipo de Usuario Google Logeado:" + localStorage.getItem('tipoUser'));
-
 
       }, (error) => {
         alert(JSON.stringify(error, undefined, 2));
@@ -65,5 +66,8 @@ export class LoginGoogleComponent implements OnInit {
 
   }
 
+  aListado() {
+    this.router.navigate(['listado']);
+  }
 
 }

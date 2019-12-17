@@ -1,4 +1,14 @@
 <div class="backgrounded" *ngIf="isLoaded===1">
+  <div class="topright">
+    <button (click)="this.aLogin()" class="button3">Login</button>
+    <button (click)="this.logOut()" class="button3">LogOut</button>
+    <button (click)="this.aRegistrarUsuario()" class="button3">Registrar</button>
+  </div>
+
+  <div class="topleft" *ngIf="logged === 'true'">
+    <h3> loggeado como: {{this.username}}</h3>
+  </div>
+
   <img src="../../assets/img/listado.png" height="129" width="335" class="imgCenter">
   <div align="center" style="padding: 24px 24px;">
   <form>

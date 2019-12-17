@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import { ApiLoginService} from "../../api-login.service";
 import {UsuarioModel} from "../../usuario.model";
+import {Router, RouterModule, Routes} from '@angular/router';
 
 @Component({
   selector: 'app-registro-de-usuario',
@@ -133,7 +134,7 @@ export class RegistroDeUsuarioComponent implements OnInit {
 
 
 
-  constructor( protected apiLogin: ApiLoginService) { }
+  constructor( protected apiLogin: ApiLoginService , private router: Router) { }
 
   ngOnInit() {
     this.usuario = new UsuarioModel("nadie", "nada");
@@ -185,6 +186,10 @@ export class RegistroDeUsuarioComponent implements OnInit {
       }
     );
 
+  }
+
+  aListado() {
+    this.router.navigate(['listado']);
   }
 
 

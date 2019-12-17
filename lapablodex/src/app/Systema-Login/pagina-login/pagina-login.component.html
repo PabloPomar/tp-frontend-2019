@@ -1,6 +1,6 @@
 <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
 <div class="image">
-
+  <button (click)="aListado()" class="volverButton">Volver</button>
   <div class="div-1">
   <h1 style="font-family: Consolas; font-size: 25px; text-align: center">Login</h1>
   <form class="form-1" [formGroup]="estiloForm" (ngSubmit)="onSubmit()">
@@ -12,6 +12,10 @@
     <button type="submit" >Log in</button>
   </form>
   <h2 style="font-family: Consolas; font-size: 25px; text-align: center">o</h2>
+    <div style="position: relative; left: 50px">
   <app-login-google></app-login-google>
+      <br>
+      <a [routerLink]="" (click)="this.aRegistrarUsuario()">¿No tienes usuario? Registrate</a>
+    </div>
   </div>
 </div>

@@ -30,7 +30,7 @@ const routes: Routes = [
     component: PokeDetalleComponent
   },
   {
-    path: 'registro',
+    path: 'registro-Usuario',
     component: RegistroDeUsuarioComponent
   },
   {

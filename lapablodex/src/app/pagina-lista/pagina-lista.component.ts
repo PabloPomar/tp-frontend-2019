@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ApiConnectionService} from '../api-connection.service';
+import {Router, RouterModule, Routes} from '@angular/router';
 
 @Component({
   selector: 'app-pagina-lista',
@@ -16,9 +17,14 @@ export class PaginaListaComponent implements OnInit {
 
   isLoaded: number;
 
-  constructor(    protected apiConnection: ApiConnectionService) { }
+  logged: string;
+
+  username: string;
+
+  constructor(    protected apiConnection: ApiConnectionService, private router: Router) { }
 
   ngOnInit() {
+    this.readLocalStorageUserIsLoggedIn();
     this.isLoaded = 0;
     this.sorterValue = 'nada';
     this.search = 'nada';
@@ -70,6 +76,26 @@ export class PaginaListaComponent implements OnInit {
       }
     );
 
+  }
+
+  aLogin() {
+    this.router.navigate(['pagina-login']);
+  }
+
+  aRegistrarUsuario() {
+    this.router.navigate(['registro-Usuario']);
+  }
+
+  readLocalStorageUserIsLoggedIn() {
+    this.logged= localStorage.getItem('isLogedIn');
+    this.username= localStorage.getItem('currentUser');
+  }
+
+  logOut() {
+    localStorage.removeItem('isLogedIn');
+    localStorage.removeItem('currentUser');
+    localStorage.removeItem('tipoUser');
+    window.location.reload();
   }
 
 }
