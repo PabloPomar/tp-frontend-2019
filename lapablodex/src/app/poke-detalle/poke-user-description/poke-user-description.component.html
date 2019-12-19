@@ -5,6 +5,17 @@
   <div class="card_title title-white">
     <p>ID:{{this.description.idDescripcion}}      fecha: {{this.description.fecha | date:'dd/MM/yyyy HH:mm' }}     Usuario: {{this.description.usuario}}</p>
     <p>Descripción: {{this.description.descripcion}}</p>
-    <i class="fa fa-thumbs-up" style="color: #4CAF50"></i> <span style="color: #4CAF50">  {{this.description.likes}}  </span> <i class="fa fa-thumbs-down"  style="color: crimson"></i> <span style="color: crimson">  {{this.description.dislikes}}  </span>
+      <div *ngIf="logged != 'true'">
+         <i class="fa fa-thumbs-up"  (click)="aLogin()"></i> <span style="color: #4CAF50">  {{this.description.likes}}  </span> <i class="fa fa-thumbs-down"  (click)="aLogin()"></i> <span style="color: crimson">  {{this.description.dislikes}}  </span>
+      </div>
+    <div *ngIf="logged === 'true'">
+      <div *ngIf="YaVoto === false">
+        <i class="fa fa-thumbs-up"  (click)="likeEffect()"></i> <span style="color: #4CAF50">  {{this.description.likes}}  </span> <i class="fa fa-thumbs-down"  (click)='dislikeEffect()'></i> <span style="color: crimson">  {{this.description.dislikes}}  </span>
+      </div>
+      <div *ngIf="YaVoto === true">
+        <i class="fa fa-thumbs-up"  (click)="yaVotoAlert()"></i> <span style="color: #4CAF50">  {{this.description.likes}}  </span> <i class="fa fa-thumbs-down"  (click)='yaVotoAlert()'></i> <span style="color: crimson">  {{this.description.dislikes}}  </span>
+      </div>
+
+    </div>
   </div>
 </div>

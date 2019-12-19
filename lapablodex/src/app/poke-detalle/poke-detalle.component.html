@@ -37,8 +37,10 @@
     <button (click)="this.sortPage()" class="button2">Sort</button>
   </form>
 
-  <div *ngFor="let descriptions of descripciones_usuarios">
-    <app-poke-user-description [user_description]="descriptions"></app-poke-user-description>
+  <div *ngFor="let descriptions of descripciones_usuarios" >
+    <div *ngIf="descriptions.idDescripcion != 0">
+      <app-poke-user-description [user_description]="descriptions"></app-poke-user-description>
+    </div>
   </div>
 
   <h2 class="h2Styler">Estadisticas Base</h2>

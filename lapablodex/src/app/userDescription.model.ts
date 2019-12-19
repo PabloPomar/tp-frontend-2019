@@ -1,11 +1,11 @@
 export class UserDescriptionModel {
-  idDescripcion: Number;
+  idDescripcion: string;
   usuario : string;
   descripcion : string;
-  likes : Number;
-  dislikes: Number;
+  likes : number;
+  dislikes: number;
   fecha: Date;
-  constructor(idDescripcion: Number, usuario: string, descripcion: string){
+  constructor(idDescripcion: string, usuario: string, descripcion: string){
     this.idDescripcion = idDescripcion;
     this.usuario = usuario;
     this.descripcion = descripcion;

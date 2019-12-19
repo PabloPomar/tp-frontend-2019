@@ -29,6 +29,8 @@ export class PokeDetalleComponent implements OnInit {
     this.apiConnection.getEspecificPokeByID(this.identificador).subscribe(
       (data) => {
         this.pokemon = data;
+        localStorage.setItem('currentPokemonId', this.pokemon.id);
+        //console.log("Current pokemon id:" + localStorage.getItem('currentPokemonId'));
         this.descripciones_usuarios = this.pokemon.user_Description;
         this.sortByLikes();
         this.isLoaded = 1;
@@ -71,7 +73,7 @@ export class PokeDetalleComponent implements OnInit {
   }
 
   sortByLikes () {
-    this.descripciones_usuarios.sort((a,b) => a.likes.toString().localeCompare(b.likes.toString()));
+    this.descripciones_usuarios.sort(function(a, b){return b.likes-a.likes});
   }
 
   sortByDate () {

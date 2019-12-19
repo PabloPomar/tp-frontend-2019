@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import {Component, OnInit, ViewChild, ElementRef, ɵNoopNgZone} from '@angular/core';
 import {Router, RouterModule, Routes} from '@angular/router';
 
 @Component({
@@ -10,6 +10,8 @@ export class LoginGoogleComponent implements OnInit {
 
   auth2: any;
 
+
+
   @ViewChild('loginRef', {static: true }) loginElement: ElementRef;
 
   constructor( private router: Router) { }
@@ -17,6 +19,8 @@ export class LoginGoogleComponent implements OnInit {
   ngOnInit() {
 
     this.googleSDK();
+
+
   }
 
   prepareLoginButton() {
@@ -36,11 +40,13 @@ export class LoginGoogleComponent implements OnInit {
         alert("Se a logeado como:" + localStorage.getItem('currentUser'));
         localStorage.setItem('tipoUser', 'usuario');
         localStorage.setItem('isLogedIn', 'true');
+        window.location.href = "http://localhost:4200/listado"
         //alert("Tipo de Usuario Google Logeado:" + localStorage.getItem('tipoUser'));
 
       }, (error) => {
         alert(JSON.stringify(error, undefined, 2));
       });
+
 
   }
   googleSDK() {
@@ -65,6 +71,7 @@ export class LoginGoogleComponent implements OnInit {
     }(document, 'script', 'google-jssdk'));
 
   }
+
 
   aListado() {
     this.router.navigate(['listado']);
