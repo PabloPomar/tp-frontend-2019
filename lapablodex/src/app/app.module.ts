@@ -19,6 +19,7 @@ import { RegistroDeUsuarioComponent } from './Systema-Login/registro-de-usuario/
 import { PaginaLoginComponent } from './Systema-Login/pagina-login/pagina-login.component';
 import { LoginGoogleComponent } from './Systema-Login/pagina-login/login-google/login-google.component';
 import { PokeUserDescriptionComponent } from './poke-detalle/poke-user-description/poke-user-description.component';
+import { PokeAddUserDescriptionComponent } from './poke-detalle/poke-add-user-description/poke-add-user-description.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { PokeUserDescriptionComponent } from './poke-detalle/poke-user-descripti
     RegistroDeUsuarioComponent,
     PaginaLoginComponent,
     LoginGoogleComponent,
-    PokeUserDescriptionComponent
+    PokeUserDescriptionComponent,
+    PokeAddUserDescriptionComponent
   ],
   imports: [
     BrowserModule,

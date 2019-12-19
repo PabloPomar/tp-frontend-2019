@@ -4,6 +4,9 @@ import DateTimeFormat = Intl.DateTimeFormat;
 import {ActivatedRoute, Router} from "@angular/router";
 import {ApiVotosService} from "../../api-votos.service";
 import {VotoModel} from "../../voto.model";
+import {ApiAgregarUserDescriptionService} from "../../api-agregar-user-description.service";
+import {UserDescriptionModel2} from "../../userDescription2.model";
+import {__await} from "tslib";
 
 @Component({
   selector: 'app-poke-user-description',
@@ -22,9 +25,11 @@ export class PokeUserDescriptionComponent implements OnInit {
   voto: VotoModel;
   YaVoto: boolean;
   private newVoto: VotoModel;
+  deleter: UserDescriptionModel2;
 
-  constructor(private router: Router, protected apiVotos: ApiVotosService) {
+  constructor(private router: Router, protected apiVotos: ApiVotosService, protected apiDelete: ApiAgregarUserDescriptionService) {
     this.voto = new VotoModel('nada', 'nada', 'nada');
+    this.deleter = new UserDescriptionModel2('nada', 'nadie' , 'Agrege su descripcion aqui', 'nada');
   }
 
   ngOnInit() {
@@ -36,6 +41,13 @@ export class PokeUserDescriptionComponent implements OnInit {
     this.description.dislikes = this.user_description.dislike;
     this.description.idDescripcion = this.user_description.idDescripcion;
     this.description.fecha = this.stringAsDate(this.user_description.fecha);
+    this.deleter.usuario = this.user_description.usuario;
+    this.deleter.likes = this.user_description.likes;
+    this.deleter.descripcion = this.user_description.descripcion;
+    this.deleter.dislike = this.user_description.dislike;
+    this.deleter.idDescripcion = this.user_description.idDescripcion;
+    this.deleter.fecha = this.stringAsDate(this.user_description.fecha);
+    this.deleter.idPokemon = this.currentId;
     this.voto.id_pokemon = this.currentId;
     this.voto.id_descipcion = this.description.idDescripcion;
     this.voto.id_usuario = this.username;
@@ -100,6 +112,24 @@ export class PokeUserDescriptionComponent implements OnInit {
     alert('Usted ya voto esta descripcion. No puede volver a votar.');
   }
 
+  async borrado() {
+    this.apiDelete.BorrarUserDescription(this.deleter).toPromise();
+    this.apiDelete.BorrarVotos(this.deleter).toPromise();
+  }
 
+  async borrado2() {
+    await this.borrado().then(function stateChange() {
+      setTimeout(function () {
+        alert("Descripcion borrada");
+        window.location.reload();
+      }, 100);
+    });
+
+  }
+
+
+  async refresh() {
+    window.location.reload();
+  }
 
 }

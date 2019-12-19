@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {ApiConnectionService} from '../api-connection.service';
 import {Router, RouterModule, Routes} from '@angular/router';
+import {ApiAgregarUserDescriptionService} from "../api-agregar-user-description.service";
 
 @Component({
   selector: 'app-poke-detalle',
@@ -18,10 +19,12 @@ export class PokeDetalleComponent implements OnInit {
   logged: string;
   username: string;
   sorterValue: string;
+  yaPosteo : boolean;
 
-  constructor(private route: ActivatedRoute , protected apiConnection: ApiConnectionService , private router: Router) { }
+  constructor(private route: ActivatedRoute , protected apiConnection: ApiConnectionService , private router: Router , protected apiUserDescription: ApiAgregarUserDescriptionService ) { }
 
   ngOnInit() {
+    this.yaPosteo = false;
     this.sorterValue = 'nada';
     this.isLoaded = 0;
     this.readLocalStorageValueUserData();
@@ -34,6 +37,7 @@ export class PokeDetalleComponent implements OnInit {
         this.descripciones_usuarios = this.pokemon.user_Description;
         this.sortByLikes();
         this.isLoaded = 1;
+        this.checkIfYaPosteo();
       },
       (error) => {
         console.error(error);
@@ -87,6 +91,19 @@ export class PokeDetalleComponent implements OnInit {
       this.sortByDate();
     }
 
+  }
+
+  checkIfYaPosteo() {
+    this.apiUserDescription.getYaPosteo(this.pokemon.id, this.username).subscribe(
+      (data) => {
+        if (data === true) {
+          this.yaPosteo = true;
+          console.log('Ya posteo');
+        } else {
+          this.yaPosteo = false;
+          console.log('No posteo');
+        }
+      } )
   }
 
 }

@@ -15,7 +15,12 @@
       <div *ngIf="YaVoto === true">
         <i class="fa fa-thumbs-up"  (click)="yaVotoAlert()"></i> <span style="color: #4CAF50">  {{this.description.likes}}  </span> <i class="fa fa-thumbs-down"  (click)='yaVotoAlert()'></i> <span style="color: crimson">  {{this.description.dislikes}}  </span>
       </div>
-
+    </div>
+    <div *ngIf="deleter.usuario === username">
+      <i class="fa fa-times" (click)="borrado2()"> </i>
+    </div>
+    <div *ngIf="this.tipoUser === 'admin'">
+      <i class="fa fa-times" (click)="borrado2()"></i>
     </div>
   </div>
 </div>

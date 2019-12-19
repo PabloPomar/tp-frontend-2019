@@ -29,6 +29,16 @@
       </form>
     </div>
   </div>
+  <div *ngIf="logged === 'true'">
+    <div *ngIf="yaPosteo === false">
+      <div *ngIf="this.tipoUser != 'admin'">
+        <app-poke-add-user-description></app-poke-add-user-description>
+      </div>
+    </div>
+    <div *ngIf="yaPosteo === true">
+      <h3>Usted ya posteo una descripcion en este pokemon</h3>
+    </div>
+  </div>
   <form>
     <select name="sorter" [(ngModel)]="sorterValue" class="boxStyler">
       <option value="likes">Sort by Likes</option>
