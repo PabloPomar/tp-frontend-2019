@@ -68,8 +68,12 @@ export class PaginaListaComponent implements OnInit {
   searchName() {
     this.apiConnection.getEspecificPoke(this.search).subscribe(
       (data) => {
-        this.pokemons = data;
-        this.sortById();
+        if(data != null) {
+          this.pokemons = data;
+          this.sortById();
+        } else {
+          alert("No se ah encontrado ningun pokemon con ese nombre");
+        }
       },
       (error) => {
         console.error(error);

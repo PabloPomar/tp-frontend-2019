@@ -14,11 +14,19 @@ export class PaginaLoginComponent implements OnInit {
   usuario: UsuarioModel;
   private isUserLoggedIn;
   public usserLogged:UsuarioModel;
-
+  dobleClave: string;
+  claveAdmin: Object;
+  isAdmin: boolean;
 
   estiloForm = new FormGroup({
     usuario: new FormControl('', [Validators.required]),
     password: new FormControl('' , [Validators.required])
+  });
+
+  estiloForm2 = new FormGroup({
+    usuario: new FormControl('', [Validators.required]),
+    password: new FormControl('' , [Validators.required]),
+    claveSeguridad: new FormControl('' , [Validators.required])
   });
 
   constructor( protected apiLogin: ApiLoginService , private router: Router) {
@@ -26,6 +34,16 @@ export class PaginaLoginComponent implements OnInit {
   }
 
   ngOnInit() {
+      this.apiLogin.obtenerClave().subscribe(
+      (data) => {
+        this.claveAdmin = data;
+        console.log("Clave seguridad:" + this.claveAdmin);
+      },
+      (error) => {
+        console.error(error);
+      });
+    this.isAdmin = false;
+    this.dobleClave = 'nada';
     this.usuario = new UsuarioModel("nadie", "nada");
   }
 
@@ -35,6 +53,11 @@ export class PaginaLoginComponent implements OnInit {
     this.usserLogged = user;
     localStorage.setItem('currentUser', user.usuario);
     localStorage.setItem('isLogedIn', 'true');
+  }
+
+  setOffUser() {
+    localStorage.removeItem('currentUser');
+    localStorage.removeItem('isLogedIn');
   }
 
 
@@ -57,13 +80,21 @@ export class PaginaLoginComponent implements OnInit {
             (data) => {
               console.log('tipo de usuario: ' + data );
               if (typeof data === "string") {
-                localStorage.setItem('tipoUser', data);
+                if(data === 'admin') {
+                  this.setOffUser();
+                  this.isAdmin = true;
+                }
+                else {
+                  localStorage.setItem('tipoUser', data);
+                  //alert("Tipo de Usuario Logeado:" + localStorage.getItem('tipoUser'));
+                  alert("El usuario es correcto y se a logeado como:" + localStorage.getItem('currentUser'));
+                  this.router.navigate(['listado']);
+                }
               }
               //alert("Tipo de Usuario Logeado:" + localStorage.getItem('tipoUser'));
             }
           )
-          alert("El usuario es correcto y se a logeado como:" + localStorage.getItem('currentUser'));
-          this.router.navigate(['listado']);
+
         }
         else {
           alert("El usuario o la contraseña son incorrectos");
@@ -84,6 +115,57 @@ export class PaginaLoginComponent implements OnInit {
 
   aRegistrarUsuario() {
     this.router.navigate(['registro-Usuario']);
+  }
+
+  setAdminUser() {
+    this.setUserLoggedIn(this.usuario);
+    localStorage.setItem('tipoUser', 'admin');
+  }
+
+  async onSubmitAdmin() {
+    //console.log(this.estiloForm.value);
+    this.usuario.usuario = this.estiloForm2.get('usuario').value;
+    this.usuario.password = this.estiloForm2.get('password').value;
+    this.dobleClave = this.estiloForm2.get('claveSeguridad').value;
+    //console.log(this.usuario);
+
+    this.apiLogin.confirmarUsuario(this.usuario).subscribe(
+      (data) => {
+        console.log(data);
+        if (data === true) {
+          this.apiLogin.obtenerTipoUsuario(this.usuario).subscribe(
+            (data) => {
+              console.log('tipo de usuario: ' + data );
+              if (typeof data === "string") {
+                if(data === 'admin') {
+                  if(this.dobleClave === this.claveAdmin) {
+                    this.setAdminUser();
+                    alert("El usuario admin es correcto y se a logeado como:" + localStorage.getItem('currentUser'));
+                    this.router.navigate(['listado']);
+                  }
+                  else {
+                    alert('La clave de confirmacion no es correcta');
+                  }
+                }
+                else {
+                  alert ('El tipo de usuario no es admin')
+                }
+              }
+              //alert("Tipo de Usuario Logeado:" + localStorage.getItem('tipoUser'));
+            }
+          )
+        }
+        else {
+          alert("El usuario o la contraseña son incorrectos");
+        }
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+
+
+
   }
 
 }

@@ -37,6 +37,11 @@ export class ApiLoginService {
       .pipe(catchError(this.handleError));
   }
 
+  obtenerClave() {
+    return this.http.get(this.baseURL + '/APIget/getClave/')
+      .pipe(catchError(this.handleError));
+  }
+
 
 
 
