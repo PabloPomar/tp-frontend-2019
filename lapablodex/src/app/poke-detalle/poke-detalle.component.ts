@@ -1,8 +1,9 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, NgModule, OnInit} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {ApiConnectionService} from '../api-connection.service';
 import {Router, RouterModule, Routes} from '@angular/router';
-import {ApiAgregarUserDescriptionService} from "../api-agregar-user-description.service";
+import {ApiAgregarUserDescriptionService} from '../api-agregar-user-description.service';
+
 
 @Component({
   selector: 'app-poke-detalle',
@@ -12,16 +13,17 @@ import {ApiAgregarUserDescriptionService} from "../api-agregar-user-description.
 export class PokeDetalleComponent implements OnInit {
 
   identificador: string;
-  descripciones_usuarios: any;
+  descripcionesUsuarios: any;
   @Input() pokemon: any;
   isLoaded: number;
   tipoUser: string;
   logged: string;
   username: string;
   sorterValue: string;
-  yaPosteo : boolean;
+  yaPosteo: boolean;
 
-  constructor(private route: ActivatedRoute , protected apiConnection: ApiConnectionService , private router: Router , protected apiUserDescription: ApiAgregarUserDescriptionService ) { }
+  constructor(private route: ActivatedRoute , protected apiConnection: ApiConnectionService ,
+              private router: Router , protected apiUserDescription: ApiAgregarUserDescriptionService ) { }
 
   ngOnInit() {
     this.yaPosteo = false;
@@ -33,8 +35,8 @@ export class PokeDetalleComponent implements OnInit {
       (data) => {
         this.pokemon = data;
         localStorage.setItem('currentPokemonId', this.pokemon.id);
-        //console.log("Current pokemon id:" + localStorage.getItem('currentPokemonId'));
-        this.descripciones_usuarios = this.pokemon.user_Description;
+        // console.log("Current pokemon id:" + localStorage.getItem('currentPokemonId'));
+        this.descripcionesUsuarios = this.pokemon.user_Description;
         this.sortByLikes();
         this.isLoaded = 1;
         this.checkIfYaPosteo();
@@ -54,9 +56,9 @@ export class PokeDetalleComponent implements OnInit {
   }
 
   readLocalStorageValueUserData() {
-    this.tipoUser= localStorage.getItem('tipoUser');
-    this.logged= localStorage.getItem('isLogedIn');
-    this.username= localStorage.getItem('currentUser');
+    this.tipoUser = localStorage.getItem('tipoUser');
+    this.logged = localStorage.getItem('isLogedIn');
+    this.username = localStorage.getItem('currentUser');
   }
 
   aLogin() {
@@ -76,12 +78,12 @@ export class PokeDetalleComponent implements OnInit {
     window.location.reload();
   }
 
-  sortByLikes () {
-    this.descripciones_usuarios.sort(function(a, b){return b.likes-a.likes});
+  sortByLikes() {
+    this.descripcionesUsuarios.sort((a, b) =>  b.likes - a.likes );
   }
 
-  sortByDate () {
-    this.descripciones_usuarios.sort((a,b) => b.fecha.localeCompare(a.fecha));
+  sortByDate() {
+    this.descripcionesUsuarios.sort((a, b) => b.fecha.localeCompare(a.fecha));
   }
 
   sortPage() {
@@ -103,7 +105,7 @@ export class PokeDetalleComponent implements OnInit {
           this.yaPosteo = false;
           console.log('No posteo');
         }
-      } )
+      } );
   }
 
 }

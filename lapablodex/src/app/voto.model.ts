@@ -1,11 +1,11 @@
 export class VotoModel {
-  id_pokemon : string;
-  id_usuario : string;
-  id_descipcion : string;
+  idpokemon: string;
+  idusuario: string;
+  iddescipcion: string;
 
 
-  constructor(id_pokemon: string, id_usuario: string, id_descipcion: string ){
-    this.id_pokemon = id_pokemon;
-    this.id_usuario = id_usuario;
-    this.id_descipcion = id_descipcion;
-  }};
+  constructor(idpokemon: string, idusuario: string, iddescipcion: string ) {
+    this.idpokemon = idpokemon;
+    this.idusuario = idusuario;
+    this.iddescipcion = iddescipcion;
+  }}

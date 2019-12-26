@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import {throwError} from 'rxjs';
-import { UsuarioModel} from "./usuario.model";
+import { UsuarioModel} from './usuario.model';
 
 @Injectable({
   providedIn: 'root'
@@ -26,14 +26,14 @@ export class ApiLoginService {
   }
 
   confirmarUsuario(user: UsuarioModel) {
-    //console.log(user);
-    return this.http.get(this.baseURL + '/APIget/ConfirmarUser/' +user.usuario + '/' +user.password)
+    // console.log(user);
+    return this.http.get(this.baseURL + '/APIget/ConfirmarUser/' + user.usuario + '/' + user.password)
       .pipe(catchError(this.handleError));
   }
 
   obtenerTipoUsuario(user: UsuarioModel) {
-    //console.log(user);
-    return this.http.get(this.baseURL + '/APIget/UsuarioEspecifico/' +user.usuario)
+    // console.log(user);
+    return this.http.get(this.baseURL + '/APIget/UsuarioEspecifico/' + user.usuario)
       .pipe(catchError(this.handleError));
   }
 

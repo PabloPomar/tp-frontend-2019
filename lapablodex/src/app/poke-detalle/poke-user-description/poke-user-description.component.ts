@@ -1,12 +1,12 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {UserDescriptionModel} from "../../userDescription.model";
+import {UserDescriptionModel} from '../../userDescription.model';
 import DateTimeFormat = Intl.DateTimeFormat;
-import {ActivatedRoute, Router} from "@angular/router";
-import {ApiVotosService} from "../../api-votos.service";
-import {VotoModel} from "../../voto.model";
-import {ApiAgregarUserDescriptionService} from "../../api-agregar-user-description.service";
-import {UserDescriptionModel2} from "../../userDescription2.model";
-import {__await} from "tslib";
+import {ActivatedRoute, Router} from '@angular/router';
+import {ApiVotosService} from '../../api-votos.service';
+import {VotoModel} from '../../voto.model';
+import {ApiAgregarUserDescriptionService} from '../../api-agregar-user-description.service';
+import {UserDescriptionModel2} from '../../userDescription2.model';
+import {__await} from 'tslib';
 
 @Component({
   selector: 'app-poke-user-description',
@@ -15,9 +15,9 @@ import {__await} from "tslib";
 })
 export class PokeUserDescriptionComponent implements OnInit {
 
-  @Input() user_description: any;
+  @Input() userDescription: any;
 
-  description : UserDescriptionModel;
+  description: UserDescriptionModel;
   tipoUser: string;
   logged: string;
   username: string;
@@ -35,22 +35,22 @@ export class PokeUserDescriptionComponent implements OnInit {
   ngOnInit() {
     this.description = new UserDescriptionModel( '0', 'nada', 'nada');
     this.readLocalStorageValueUserData();
-    this.description.usuario = this.user_description.usuario;
-    this.description.likes = this.user_description.likes;
-    this.description.descripcion = this.user_description.descripcion;
-    this.description.dislikes = this.user_description.dislike;
-    this.description.idDescripcion = this.user_description.idDescripcion;
-    this.description.fecha = this.stringAsDate(this.user_description.fecha);
-    this.deleter.usuario = this.user_description.usuario;
-    this.deleter.likes = this.user_description.likes;
-    this.deleter.descripcion = this.user_description.descripcion;
-    this.deleter.dislike = this.user_description.dislike;
-    this.deleter.idDescripcion = this.user_description.idDescripcion;
-    this.deleter.fecha = this.stringAsDate(this.user_description.fecha);
+    this.description.usuario = this.userDescription.usuario;
+    this.description.likes = this.userDescription.likes;
+    this.description.descripcion = this.userDescription.descripcion;
+    this.description.dislikes = this.userDescription.dislike;
+    this.description.idDescripcion = this.userDescription.idDescripcion;
+    this.description.fecha = this.stringAsDate(this.userDescription.fecha);
+    this.deleter.usuario = this.userDescription.usuario;
+    this.deleter.likes = this.userDescription.likes;
+    this.deleter.descripcion = this.userDescription.descripcion;
+    this.deleter.dislike = this.userDescription.dislike;
+    this.deleter.idDescripcion = this.userDescription.idDescripcion;
+    this.deleter.fecha = this.stringAsDate(this.userDescription.fecha);
     this.deleter.idPokemon = this.currentId;
-    this.voto.id_pokemon = this.currentId;
-    this.voto.id_descipcion = this.description.idDescripcion;
-    this.voto.id_usuario = this.username;
+    this.voto.idpokemon = this.currentId;
+    this.voto.iddescipcion = this.description.idDescripcion;
+    this.voto.idusuario = this.username;
     this.yaVotoComprobar();
   }
 
@@ -59,9 +59,9 @@ export class PokeUserDescriptionComponent implements OnInit {
   }
 
   readLocalStorageValueUserData() {
-    this.tipoUser= localStorage.getItem('tipoUser');
-    this.logged= localStorage.getItem('isLogedIn');
-    this.username= localStorage.getItem('currentUser');
+    this.tipoUser = localStorage.getItem('tipoUser');
+    this.logged = localStorage.getItem('isLogedIn');
+    this.username = localStorage.getItem('currentUser');
     this.currentId = localStorage.getItem('currentPokemonId');
   }
 
@@ -69,19 +69,19 @@ export class PokeUserDescriptionComponent implements OnInit {
     this.router.navigate(['pagina-login']);
   }
 
-  yaVotoComprobar(){
+  yaVotoComprobar() {
     this.apiVotos.yaVoto(this.voto).subscribe(
       (data) => {
         if (data === true) {
           this.YaVoto = true;
-          console.log('Ya voto en '+ this.description.idDescripcion + ':'  + this.YaVoto);
+          console.log('Ya voto en ' + this.description.idDescripcion + ':'  + this.YaVoto);
         } else {
           this.YaVoto = false;
-          console.log('Ya voto en '+ this.description.idDescripcion + ':'  + this.YaVoto);
+          console.log('Ya voto en ' + this.description.idDescripcion + ':'  + this.YaVoto);
         }
-      } )
+      } );
   }
-  
+
   async agregarVoto() {
     this.newVoto = new VotoModel(this.currentId, this.username, this.description.idDescripcion);
     this.apiVotos.AgregarVoto(this.newVoto).subscribe();
@@ -99,13 +99,13 @@ export class PokeUserDescriptionComponent implements OnInit {
   likeEffect() {
     this.agregarVoto();
     this.aumentarLike();
-    this.description.likes = this.description.likes+1 ;
+    this.description.likes = this.description.likes + 1 ;
   }
 
   dislikeEffect() {
     this.agregarVoto();
     this.aumentarDislike();
-    this.description.dislikes = this.description.dislikes+1;
+    this.description.dislikes = this.description.dislikes + 1;
   }
 
   yaVotoAlert() {
@@ -119,8 +119,8 @@ export class PokeUserDescriptionComponent implements OnInit {
 
   async borrado2() {
     await this.borrado().then(function stateChange() {
-      setTimeout(function () {
-        alert("Descripcion borrada");
+      setTimeout(() => {
+        alert('Descripcion borrada');
         window.location.reload();
       }, 100);
     });

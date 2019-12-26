@@ -68,11 +68,11 @@ export class PaginaListaComponent implements OnInit {
   searchName() {
     this.apiConnection.getEspecificPoke(this.search).subscribe(
       (data) => {
-        if(data != null) {
+        if (data != null) {
           this.pokemons = data;
           this.sortById();
         } else {
-          alert("No se ah encontrado ningun pokemon con ese nombre");
+          alert('No se ah encontrado ningun pokemon con ese nombre');
         }
       },
       (error) => {
@@ -91,8 +91,8 @@ export class PaginaListaComponent implements OnInit {
   }
 
   readLocalStorageUserIsLoggedIn() {
-    this.logged= localStorage.getItem('isLogedIn');
-    this.username= localStorage.getItem('currentUser');
+    this.logged = localStorage.getItem('isLogedIn');
+    this.username = localStorage.getItem('currentUser');
   }
 
   logOut() {

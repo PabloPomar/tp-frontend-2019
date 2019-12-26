@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {ApiAgregarUserDescriptionService} from "../../api-agregar-user-description.service";
-import {UserDescriptionModel2} from "../../userDescription2.model";
+import {ApiAgregarUserDescriptionService} from '../../api-agregar-user-description.service';
+import {UserDescriptionModel2} from '../../userDescription2.model';
 
 @Component({
   selector: 'app-poke-add-user-description',
@@ -29,9 +29,9 @@ export class PokeAddUserDescriptionComponent implements OnInit {
   }
 
   readLocalStorageValueUserData() {
-    this.tipoUser= localStorage.getItem('tipoUser');
-    this.logged= localStorage.getItem('isLogedIn');
-    this.username= localStorage.getItem('currentUser');
+    this.tipoUser = localStorage.getItem('tipoUser');
+    this.logged = localStorage.getItem('isLogedIn');
+    this.username = localStorage.getItem('currentUser');
     this.currentId = localStorage.getItem('currentPokemonId');
   }
 
@@ -54,13 +54,13 @@ export class PokeAddUserDescriptionComponent implements OnInit {
 
   }
 
-  asyncserchforProxNum () {
+  asyncserchforProxNum() {
     this.apiUserDescription.proxNum(this.currentId).toPromise().then(
       data => {
         console.log('Proximo Numero: ' + data);
         this.userDescription.idDescripcion = JSON.stringify(data);
       }
-    )
+    );
   }
 
    refresh(): void {

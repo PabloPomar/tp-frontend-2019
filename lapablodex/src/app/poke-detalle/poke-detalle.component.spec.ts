@@ -3,15 +3,18 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PokeDetalleComponent } from './poke-detalle.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import {HttpClientModule} from '@angular/common/http';
+import {PokeUserDescriptionComponent} from './poke-user-description/poke-user-description.component';
+import {PokeAddUserDescriptionComponent} from './poke-add-user-description/poke-add-user-description.component';
 
 describe('PokeDetalleComponent', () => {
   let component: PokeDetalleComponent;
+
   let fixture: ComponentFixture<PokeDetalleComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [FormsModule, ReactiveFormsModule, RouterTestingModule, HttpClientModule],
-      declarations: [ PokeDetalleComponent ],
+      declarations: [ PokeDetalleComponent, PokeUserDescriptionComponent, PokeAddUserDescriptionComponent ],
     })
     .compileComponents();
   }));

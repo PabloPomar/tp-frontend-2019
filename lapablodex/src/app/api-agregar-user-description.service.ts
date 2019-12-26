@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import {throwError} from 'rxjs';
-import {VotoModel} from "./voto.model";
-import {UserDescriptionModel2} from "./userDescription2.model";
+import {VotoModel} from './voto.model';
+import {UserDescriptionModel2} from './userDescription2.model';
 
 
 @Injectable({
@@ -16,26 +16,26 @@ export class ApiAgregarUserDescriptionService {
   baseURL = 'http://localhost:3000';
 
   getYaPosteo(id: string, usuario: string) {
-    return this.http.get(this.baseURL + '/APIget/YaPosteo/' + id +'/' + usuario);
+    return this.http.get(this.baseURL + '/APIget/YaPosteo/' + id + '/' + usuario);
   }
 
-  AgregarUserDescription(desc :  UserDescriptionModel2) {
+  AgregarUserDescription(desc: UserDescriptionModel2) {
     console.log(desc);
     return this.http.post<UserDescriptionModel2>(this.baseURL + '/APIpost/agregarUserDesc', desc)
       .pipe(catchError(this.handleError));
   }
 
-  proxNum (id : string) {
+  proxNum(id: string) {
     return this.http.get(this.baseURL + '/APIget/proxNum/' + id);
   }
 
-  BorrarUserDescription(desc :  UserDescriptionModel2) {
+  BorrarUserDescription(desc: UserDescriptionModel2) {
     console.log(desc);
     return this.http.post<UserDescriptionModel2>(this.baseURL + '/APIpost/BorrarUserDesc', desc)
       .pipe(catchError(this.handleError));
   }
 
-  BorrarVotos(desc :  UserDescriptionModel2) {
+  BorrarVotos(desc: UserDescriptionModel2) {
     console.log(desc);
     return this.http.post<UserDescriptionModel2>(this.baseURL + '/APIpost/BorrarVotos', desc)
       .pipe(catchError(this.handleError));

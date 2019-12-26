@@ -28,7 +28,7 @@ export class LoginGoogleComponent implements OnInit {
     this.auth2.attachClickHandler(this.loginElement.nativeElement, {},
       (googleUser) => {
 
-        let profile = googleUser.getBasicProfile();
+        const profile = googleUser.getBasicProfile();
         /*
         console.log('Token || ' + googleUser.getAuthResponse().id_token);
         console.log('ID: ' + profile.getId());
@@ -37,11 +37,11 @@ export class LoginGoogleComponent implements OnInit {
         console.log('Email: ' + profile.getEmail()); */
         // YOUR CODE HERE
         localStorage.setItem('currentUser', profile.getName());
-        alert("Se a logeado como:" + localStorage.getItem('currentUser'));
+        alert('Se a logeado como:' + localStorage.getItem('currentUser'));
         localStorage.setItem('tipoUser', 'usuario');
         localStorage.setItem('isLogedIn', 'true');
-        window.location.href = "http://localhost:4200/listado"
-        //alert("Tipo de Usuario Google Logeado:" + localStorage.getItem('tipoUser'));
+        window.location.href = 'http://localhost:4200/listado';
+        // alert("Tipo de Usuario Google Logeado:" + localStorage.getItem('tipoUser'));
 
       }, (error) => {
         alert(JSON.stringify(error, undefined, 2));
@@ -51,25 +51,26 @@ export class LoginGoogleComponent implements OnInit {
   }
   googleSDK() {
 
-    window['googleSDKLoaded'] = () => {
-      window['gapi'].load('auth2', () => {
-        this.auth2 = window['gapi'].auth2.init({
+    window[`googleSDKLoaded`] = () => {
+      window[`gapi`].load('auth2', () => {
+        this.auth2 = window[`gapi`].auth2.init({
           client_id: '904319398814-sru1t7deojie1ghua1qem91q3equ57v5.apps.googleusercontent.com',
           cookiepolicy: 'single_host_origin',
           scope: 'profile email'
         });
         this.prepareLoginButton();
       });
-    }
-
-    (function(d, s, id){
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) {return;}
+    };
+    /* tslint:disable:only-arrow-functions */
+    (function(d, s, id) {
+      const fjs = d.getElementsByTagName(s)[0];
+      let js: any;
+      if (d.getElementById(id)) {return; }
       js = d.createElement(s); js.id = id;
-      js.src = "https://apis.google.com/js/platform.js?onload=googleSDKLoaded";
+      js.src = 'https://apis.google.com/js/platform.js?onload=googleSDKLoaded';
       fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'google-jssdk'));
-
+    /* tslint:enable:only-arrow-functions */
   }
 
 

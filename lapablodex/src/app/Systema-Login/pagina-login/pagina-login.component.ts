@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {UsuarioModel} from "../../usuario.model";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-import { ApiLoginService} from "../../api-login.service";
+import {UsuarioModel} from '../../usuario.model';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import { ApiLoginService} from '../../api-login.service';
 import {Router, RouterModule, Routes} from '@angular/router';
 
 @Component({
@@ -13,9 +13,9 @@ export class PaginaLoginComponent implements OnInit {
 
   usuario: UsuarioModel;
   private isUserLoggedIn;
-  public usserLogged:UsuarioModel;
+  public usserLogged: UsuarioModel;
   dobleClave: string;
-  claveAdmin: Object;
+  claveAdmin: object;
   isAdmin: boolean;
 
   estiloForm = new FormGroup({
@@ -37,18 +37,18 @@ export class PaginaLoginComponent implements OnInit {
       this.apiLogin.obtenerClave().subscribe(
       (data) => {
         this.claveAdmin = data;
-        console.log("Clave seguridad:" + this.claveAdmin);
+        console.log('Clave seguridad:' + this.claveAdmin);
       },
       (error) => {
         console.error(error);
       });
-    this.isAdmin = false;
-    this.dobleClave = 'nada';
-    this.usuario = new UsuarioModel("nadie", "nada");
+      this.isAdmin = false;
+      this.dobleClave = 'nada';
+      this.usuario = new UsuarioModel('nadie', 'nada');
   }
 
 
-  setUserLoggedIn(user:UsuarioModel) {
+  setUserLoggedIn(user: UsuarioModel) {
     this.isUserLoggedIn = true;
     this.usserLogged = user;
     localStorage.setItem('currentUser', user.usuario);
@@ -66,10 +66,10 @@ export class PaginaLoginComponent implements OnInit {
   }
 
   async onSubmit() {
-    //console.log(this.estiloForm.value);
+    // console.log(this.estiloForm.value);
     this.usuario.usuario = this.estiloForm.get('usuario').value;
     this.usuario.password = this.estiloForm.get('password').value;
-    //console.log(this.usuario);
+    // console.log(this.usuario);
 
     this.apiLogin.confirmarUsuario(this.usuario).subscribe(
       (data) => {
@@ -77,27 +77,25 @@ export class PaginaLoginComponent implements OnInit {
         if (data === true) {
           this.setUserLoggedIn(this.usuario);
           this.apiLogin.obtenerTipoUsuario(this.usuario).subscribe(
-            (data) => {
-              console.log('tipo de usuario: ' + data );
-              if (typeof data === "string") {
-                if(data === 'admin') {
+            (data2) => {
+              console.log('tipo de usuario: ' + data2 );
+              if (typeof data2 === 'string') {
+                if (data2 === 'admin') {
                   this.setOffUser();
                   this.isAdmin = true;
-                }
-                else {
-                  localStorage.setItem('tipoUser', data);
-                  //alert("Tipo de Usuario Logeado:" + localStorage.getItem('tipoUser'));
-                  alert("El usuario es correcto y se a logeado como:" + localStorage.getItem('currentUser'));
+                } else {
+                  localStorage.setItem('tipoUser', data2);
+                  // alert("Tipo de Usuario Logeado:" + localStorage.getItem('tipoUser'));
+                  alert('El usuario es correcto y se a logeado como:' + localStorage.getItem('currentUser'));
                   this.router.navigate(['listado']);
                 }
               }
-              //alert("Tipo de Usuario Logeado:" + localStorage.getItem('tipoUser'));
+              // alert("Tipo de Usuario Logeado:" + localStorage.getItem('tipoUser'));
             }
-          )
+          );
 
-        }
-        else {
-          alert("El usuario o la contraseña son incorrectos");
+        } else {
+          alert('El usuario o la contraseña son incorrectos');
         }
       },
       (error) => {
@@ -123,40 +121,37 @@ export class PaginaLoginComponent implements OnInit {
   }
 
   async onSubmitAdmin() {
-    //console.log(this.estiloForm.value);
+    // console.log(this.estiloForm.value);
     this.usuario.usuario = this.estiloForm2.get('usuario').value;
     this.usuario.password = this.estiloForm2.get('password').value;
     this.dobleClave = this.estiloForm2.get('claveSeguridad').value;
-    //console.log(this.usuario);
+    // console.log(this.usuario);
 
     this.apiLogin.confirmarUsuario(this.usuario).subscribe(
       (data) => {
         console.log(data);
         if (data === true) {
           this.apiLogin.obtenerTipoUsuario(this.usuario).subscribe(
-            (data) => {
-              console.log('tipo de usuario: ' + data );
-              if (typeof data === "string") {
-                if(data === 'admin') {
-                  if(this.dobleClave === this.claveAdmin) {
+            (data2) => {
+              console.log('tipo de usuario: ' + data2 );
+              if (typeof data2 === 'string') {
+                if (data2 === 'admin') {
+                  if (this.dobleClave === this.claveAdmin.toString()) {
                     this.setAdminUser();
-                    alert("El usuario admin es correcto y se a logeado como:" + localStorage.getItem('currentUser'));
+                    alert('El usuario admin es correcto y se a logeado como:' + localStorage.getItem('currentUser'));
                     this.router.navigate(['listado']);
-                  }
-                  else {
+                  } else {
                     alert('La clave de confirmacion no es correcta');
                   }
-                }
-                else {
-                  alert ('El tipo de usuario no es admin')
+                } else {
+                  alert ('El tipo de usuario no es admin');
                 }
               }
-              //alert("Tipo de Usuario Logeado:" + localStorage.getItem('tipoUser'));
+              // alert("Tipo de Usuario Logeado:" + localStorage.getItem('tipoUser'));
             }
-          )
-        }
-        else {
-          alert("El usuario o la contraseña son incorrectos");
+          );
+        } else {
+          alert('El usuario o la contraseña son incorrectos');
         }
       },
       (error) => {

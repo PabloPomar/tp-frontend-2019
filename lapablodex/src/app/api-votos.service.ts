@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import {throwError} from 'rxjs';
-import {VotoModel} from "./voto.model";
-import {UsuarioModel} from "./usuario.model";
+import {VotoModel} from './voto.model';
+import {UsuarioModel} from './usuario.model';
 
 @Injectable({
   providedIn: 'root'
@@ -15,10 +15,10 @@ export class ApiVotosService {
   baseURL = 'http://localhost:3000';
 
   yaVoto(voto: VotoModel) {
-    return this.http.get(this.baseURL + '/APIget/YaVoto/' + voto.id_pokemon +'/' + voto.id_usuario + '/' + voto.id_descipcion);
+    return this.http.get(this.baseURL + '/APIget/YaVoto/' + voto.idpokemon + '/' + voto.idusuario + '/' + voto.iddescipcion);
   }
 
-  AgregarVoto(voto :  VotoModel) {
+  AgregarVoto(voto: VotoModel) {
     console.log(voto);
     return this.http.post<VotoModel>(this.baseURL + '/APIpost/agregarVoto', voto)
       .pipe(catchError(this.handleError));
@@ -31,7 +31,7 @@ export class ApiVotosService {
   }
 
   aumentarDislike(id: string, idDesc: string) {
-    return this.http.get(this.baseURL + '/APIpost/aumentarDislike/'+ id + '/' + idDesc);
+    return this.http.get(this.baseURL + '/APIpost/aumentarDislike/' + id + '/' + idDesc);
   }
 
   private handleError(error: HttpErrorResponse) {
