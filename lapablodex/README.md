@@ -1,3 +1,42 @@
+#Tp de aprovacion para la Asignatura de TTADS 2019 de la UTN de rosario
+
+Alumno: Pablo Pomar Legajo: 43655
+
+#Requisitos para correr
+
+Utilizar la API encontrada en el siguiente enlace: https://github.com/PabloPomar/La_Poke_API
+
+Instalar la base de datos en la misma proveida en la misma api.
+
+Proyecto final de TTADS: Expansion de proyecto de front-end "La Pablodex"
+
+
+# AGREGADOS PARA EL PROYECTO FINAL:
+
+Sistema de registro y login en la pagina para poder realizar una descripccion extra (distinta a la descripcion normal)
+El sistema tambien deberia permitir realizar el login con la cuenta de Google.
+
+Las descripcciones de cada persona se muestran en un listado en la pagina particular del pokemon ordenadas por
+fecha de posteo o por cantidad de likes segun el usuario y cada usuario
+puede votar 1 vez por like o dislike la descripcion (Por mas graciosa o mejor planteada). 
+
+El usuario que posteo la descripccion tiene la opcion de borrar la descripcion que el mismo posteo y 
+solo puede postear una descripcion por pokemon. No puede modificarla una vez posteada por cuestiones
+de los likes que dejan la gente.
+
+Un usuario especial con calidad de administrador tiene la capacidad de borrar cualquier descripcion si considera
+que esta viola las normas de la comunidad. El administrador NO puede postear descripciones del listado pero si
+puede modificar la descripcion normal (No la del listado pero si la que aparece al principio) de la pagina. 
+
+Para loguear como administrador el sistema debe realizar una comprobacion de dos partes  (Usuario y contraseña y PIN
+de seguridad). 
+
+
+--------------------------------------------------------------------------------------------
+
+
+
+
 #Tp de frontEnd para la Asignatura de TTADS 2019 de la UTN de rosario
 
 Alumno: Pablo Pomar Legajo: 43655
