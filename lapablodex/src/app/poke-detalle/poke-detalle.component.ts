@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import {ApiConnectionService} from '../api-connection.service';
 import {Router, RouterModule, Routes} from '@angular/router';
 import {ApiAgregarUserDescriptionService} from '../api-agregar-user-description.service';
+import {PersistencesService} from "../persistences.service";
 
 
 @Component({
@@ -17,24 +18,25 @@ export class PokeDetalleComponent implements OnInit {
   @Input() pokemon: any;
   isLoaded: number;
   tipoUser: string;
-  logged: string;
+  logged: boolean;
   username: string;
   sorterValue: string;
   yaPosteo: boolean;
 
   constructor(private route: ActivatedRoute , protected apiConnection: ApiConnectionService ,
-              private router: Router , protected apiUserDescription: ApiAgregarUserDescriptionService ) { }
+              private router: Router , protected apiUserDescription: ApiAgregarUserDescriptionService, protected apiPersistense: PersistencesService ) { }
 
   ngOnInit() {
     this.yaPosteo = false;
     this.sorterValue = 'nada';
     this.isLoaded = 0;
-    this.readLocalStorageValueUserData();
+    this.readUserData();
     this.identificador = this.route.snapshot.paramMap.get('id');
     this.apiConnection.getEspecificPokeByID(this.identificador).subscribe(
       (data) => {
         this.pokemon = data;
-        localStorage.setItem('currentPokemonId', this.pokemon.id);
+        this.apiPersistense.setPokeId(this.pokemon.id);
+        //localStorage.setItem('currentPokemonId', this.pokemon.id);
         // console.log("Current pokemon id:" + localStorage.getItem('currentPokemonId'));
         this.descripcionesUsuarios = this.pokemon.user_Description;
         this.sortByLikes();
@@ -55,28 +57,18 @@ export class PokeDetalleComponent implements OnInit {
     this.router.navigate(['listado']);
   }
 
-  readLocalStorageValueUserData() {
+  readUserData() {
+    this.tipoUser = this.apiPersistense.getTipoUser();
+    this.logged = this.apiPersistense.getIslogedIn();
+    this.username = this.apiPersistense.getUserName();
+    /*
     this.tipoUser = localStorage.getItem('tipoUser');
     this.logged = localStorage.getItem('isLogedIn');
     this.username = localStorage.getItem('currentUser');
-  }
-
-  aLogin() {
-    this.router.navigate(['pagina-login']);
-  }
-
-  aRegistrarUsuario() {
-    this.router.navigate(['registro-Usuario']);
+     */
   }
 
 
-
-  logOut() {
-    localStorage.removeItem('isLogedIn');
-    localStorage.removeItem('currentUser');
-    localStorage.removeItem('tipoUser');
-    window.location.reload();
-  }
 
   sortByLikes() {
     this.descripcionesUsuarios.sort((a, b) =>  b.likes - a.likes );

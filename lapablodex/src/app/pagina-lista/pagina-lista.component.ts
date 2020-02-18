@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ApiConnectionService} from '../api-connection.service';
 import {Router, RouterModule, Routes} from '@angular/router';
+import {PersistencesService} from "../persistences.service";
 
 @Component({
   selector: 'app-pagina-lista',
@@ -17,14 +18,14 @@ export class PaginaListaComponent implements OnInit {
 
   isLoaded: number;
 
-  logged: string;
+  logged: boolean;
 
   username: string;
 
-  constructor(    protected apiConnection: ApiConnectionService, private router: Router) { }
+  constructor(    protected apiConnection: ApiConnectionService, private router: Router,  protected apiPersistense: PersistencesService) { }
 
   ngOnInit() {
-    this.readLocalStorageUserIsLoggedIn();
+    this.readIfUserIsLoggedIn();
     this.isLoaded = 0;
     this.sorterValue = 'nada';
     this.search = 'nada';
@@ -82,24 +83,15 @@ export class PaginaListaComponent implements OnInit {
 
   }
 
-  aLogin() {
-    this.router.navigate(['pagina-login']);
-  }
 
-  aRegistrarUsuario() {
-    this.router.navigate(['registro-Usuario']);
-  }
 
-  readLocalStorageUserIsLoggedIn() {
+  readIfUserIsLoggedIn() {
+    this.logged = this.apiPersistense.getIslogedIn();
+    this.username = this.apiPersistense.getUserName();
+    /*
     this.logged = localStorage.getItem('isLogedIn');
     this.username = localStorage.getItem('currentUser');
-  }
-
-  logOut() {
-    localStorage.removeItem('isLogedIn');
-    localStorage.removeItem('currentUser');
-    localStorage.removeItem('tipoUser');
-    window.location.reload();
+     */
   }
 
 }

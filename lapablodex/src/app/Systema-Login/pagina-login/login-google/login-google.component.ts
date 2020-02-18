@@ -1,5 +1,6 @@
 import {Component, OnInit, ViewChild, ElementRef, ɵNoopNgZone} from '@angular/core';
 import {Router, RouterModule, Routes} from '@angular/router';
+import { PersistencesService} from "../../../persistences.service";
 
 @Component({
   selector: 'app-login-google',
@@ -14,7 +15,7 @@ export class LoginGoogleComponent implements OnInit {
 
   @ViewChild('loginRef', {static: true }) loginElement: ElementRef;
 
-  constructor( private router: Router) { }
+  constructor( private router: Router, protected apiPersistense: PersistencesService) { }
 
   ngOnInit() {
 
@@ -36,11 +37,16 @@ export class LoginGoogleComponent implements OnInit {
         console.log('Image URL: ' + profile.getImageUrl());
         console.log('Email: ' + profile.getEmail()); */
         // YOUR CODE HERE
+        /*
         localStorage.setItem('currentUser', profile.getName());
         alert('Se a logeado como:' + localStorage.getItem('currentUser'));
         localStorage.setItem('tipoUser', 'usuario');
         localStorage.setItem('isLogedIn', 'true');
-        window.location.href = 'http://localhost:4200/listado';
+         */
+        this.apiPersistense.setCurrentUser(profile.getName());
+        alert('Se a logeado como:' + this.apiPersistense.getUserName());
+        this.apiPersistense.setTipoUserAsUser();
+        this.apiPersistense.setLoggedInTrue();
         // alert("Tipo de Usuario Google Logeado:" + localStorage.getItem('tipoUser'));
 
       }, (error) => {

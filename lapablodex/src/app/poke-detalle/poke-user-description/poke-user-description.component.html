@@ -1,14 +1,12 @@
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
 <div class="card 1">
   <div class="card_image"> <img src="https://res.cloudinary.com/teepublic/image/private/s--G5xW2Tv4--/t_Preview/b_rgb:484849,c_lpad,f_jpg,h_630,q_90,w_1200/v1565708983/production/designs/5591082_2.jpg" /> </div>
   <div class="card_title title-white">
     <p>ID:{{this.description.idDescripcion}}      fecha: {{this.description.fecha | date:'dd/MM/yyyy HH:mm' }}     Usuario: {{this.description.usuario}}</p>
     <p>Descripción: {{this.description.descripcion}}</p>
-      <div *ngIf="logged != 'true'">
+      <div *ngIf="logged != true">
          <i class="fa fa-thumbs-up"  (click)="aLogin()"></i> <span style="color: #4CAF50">  {{this.description.likes}}  </span> <i class="fa fa-thumbs-down"  (click)="aLogin()"></i> <span style="color: crimson">  {{this.description.dislikes}}  </span>
       </div>
-    <div *ngIf="logged === 'true'">
+    <div *ngIf="logged === true">
       <div *ngIf="YaVoto === false">
         <i class="fa fa-thumbs-up"  (click)="likeEffect()"></i> <span style="color: #4CAF50">  {{this.description.likes}}  </span> <i class="fa fa-thumbs-down"  (click)='dislikeEffect()'></i> <span style="color: crimson">  {{this.description.dislikes}}  </span>
       </div>

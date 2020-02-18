@@ -1,12 +1,7 @@
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-      crossorigin="anonymous">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <div class="topright">
-  <button (click)="this.aLogin()" >Login</button>
-  <button (click)="this.logOut()" >LogOut</button>
-  <button (click)="this.aRegistrarUsuario()" >Registrar</button>
+  <app-botones-login></app-botones-login>
 </div>
-<div class="topleft" *ngIf="logged === 'true'">
+<div class="topleft" *ngIf="logged === true">
   <h3> loggeado como: {{this.username}}</h3>
 </div>
 <div *ngIf="isLoaded == 1" class="diviser">
@@ -29,7 +24,7 @@
       </form>
     </div>
   </div>
-  <div *ngIf="logged === 'true'">
+  <div *ngIf="logged === true">
     <div *ngIf="yaPosteo === false">
       <div *ngIf="this.tipoUser != 'admin'">
         <app-poke-add-user-description></app-poke-add-user-description>

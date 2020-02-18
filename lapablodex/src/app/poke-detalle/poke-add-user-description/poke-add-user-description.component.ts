@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {ApiAgregarUserDescriptionService} from '../../api-agregar-user-description.service';
 import {UserDescriptionModel2} from '../../userDescription2.model';
+import {PersistencesService} from "../../persistences.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-poke-add-user-description',
@@ -11,28 +13,34 @@ export class PokeAddUserDescriptionComponent implements OnInit {
 
   userDescription: UserDescriptionModel2;
   tipoUser: string;
-  logged: string;
+  logged: boolean;
   username: string;
   currentId: string;
 
 
-  constructor( protected apiUserDescription: ApiAgregarUserDescriptionService) {
+  constructor( private router: Router, protected apiUserDescription: ApiAgregarUserDescriptionService ,  protected apiPersistense: PersistencesService) {
     this.userDescription = new UserDescriptionModel2('nada', 'nadie' , 'Agrege su descripcion aqui', 'nada');
   }
 
   ngOnInit() {
-    this.readLocalStorageValueUserData();
+    this.readUserData();
     this.userDescription.usuario = this.username;
     this.userDescription.idPokemon = this.currentId;
     this.searchProxNum();
 
   }
 
-  readLocalStorageValueUserData() {
+  readUserData() {
+    this.tipoUser = this.apiPersistense.getTipoUser();
+    this.logged = this.apiPersistense.getIslogedIn();
+    this.username = this.apiPersistense.getUserName();
+    this.currentId = this.apiPersistense.getPokeId();
+    /*
     this.tipoUser = localStorage.getItem('tipoUser');
     this.logged = localStorage.getItem('isLogedIn');
     this.username = localStorage.getItem('currentUser');
     this.currentId = localStorage.getItem('currentPokemonId');
+     */
   }
 
   async agregarUserDescription() {
@@ -64,7 +72,7 @@ export class PokeAddUserDescriptionComponent implements OnInit {
   }
 
    refresh(): void {
-    window.location.reload();
+     this.router.navigate(['listado']);
   }
 
 }

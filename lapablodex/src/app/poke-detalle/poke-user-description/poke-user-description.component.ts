@@ -7,6 +7,7 @@ import {VotoModel} from '../../voto.model';
 import {ApiAgregarUserDescriptionService} from '../../api-agregar-user-description.service';
 import {UserDescriptionModel2} from '../../userDescription2.model';
 import {__await} from 'tslib';
+import {PersistencesService} from "../../persistences.service";
 
 @Component({
   selector: 'app-poke-user-description',
@@ -19,7 +20,7 @@ export class PokeUserDescriptionComponent implements OnInit {
 
   description: UserDescriptionModel;
   tipoUser: string;
-  logged: string;
+  logged: boolean;
   username: string;
   currentId: string;
   voto: VotoModel;
@@ -27,14 +28,14 @@ export class PokeUserDescriptionComponent implements OnInit {
   private newVoto: VotoModel;
   deleter: UserDescriptionModel2;
 
-  constructor(private router: Router, protected apiVotos: ApiVotosService, protected apiDelete: ApiAgregarUserDescriptionService) {
+  constructor(private router: Router, protected apiVotos: ApiVotosService, protected apiDelete: ApiAgregarUserDescriptionService , protected apiPersistense: PersistencesService) {
     this.voto = new VotoModel('nada', 'nada', 'nada');
     this.deleter = new UserDescriptionModel2('nada', 'nadie' , 'Agrege su descripcion aqui', 'nada');
   }
 
   ngOnInit() {
     this.description = new UserDescriptionModel( '0', 'nada', 'nada');
-    this.readLocalStorageValueUserData();
+    this.readUserData();
     this.description.usuario = this.userDescription.usuario;
     this.description.likes = this.userDescription.likes;
     this.description.descripcion = this.userDescription.descripcion;
@@ -58,14 +59,20 @@ export class PokeUserDescriptionComponent implements OnInit {
     return new Date(dateStr);
   }
 
-  readLocalStorageValueUserData() {
-    this.tipoUser = localStorage.getItem('tipoUser');
-    this.logged = localStorage.getItem('isLogedIn');
-    this.username = localStorage.getItem('currentUser');
-    this.currentId = localStorage.getItem('currentPokemonId');
-  }
+    readUserData() {
+      this.tipoUser = this.apiPersistense.getTipoUser();
+      this.logged = this.apiPersistense.getIslogedIn();
+      this.username = this.apiPersistense.getUserName();
+      this.currentId = this.apiPersistense.getPokeId();
+      /*
+      this.tipoUser = localStorage.getItem('tipoUser');
+      this.logged = localStorage.getItem('isLogedIn');
+      this.username = localStorage.getItem('currentUser');
+      this.currentId = localStorage.getItem('currentPokemonId');
+       */
+    }
 
-  aLogin() {
+    aLogin() {
     this.router.navigate(['pagina-login']);
   }
 
@@ -118,18 +125,14 @@ export class PokeUserDescriptionComponent implements OnInit {
   }
 
   async borrado2() {
-    await this.borrado().then(function stateChange() {
-      setTimeout(() => {
-        alert('Descripcion borrada');
-        window.location.reload();
-      }, 100);
-    });
+    this.borrado();
+    this.refresh();
 
   }
 
 
   async refresh() {
-    window.location.reload();
+    this.router.navigate(['listado']);
   }
 
 }

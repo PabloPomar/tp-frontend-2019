@@ -20,6 +20,7 @@ import { PaginaLoginComponent } from './Systema-Login/pagina-login/pagina-login.
 import { LoginGoogleComponent } from './Systema-Login/pagina-login/login-google/login-google.component';
 import { PokeUserDescriptionComponent } from './poke-detalle/poke-user-description/poke-user-description.component';
 import { PokeAddUserDescriptionComponent } from './poke-detalle/poke-add-user-description/poke-add-user-description.component';
+import { BotonesLoginComponent } from './botones-login/botones-login.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { PokeAddUserDescriptionComponent } from './poke-detalle/poke-add-user-de
     PaginaLoginComponent,
     LoginGoogleComponent,
     PokeUserDescriptionComponent,
-    PokeAddUserDescriptionComponent
+    PokeAddUserDescriptionComponent,
+    BotonesLoginComponent
   ],
   imports: [
     BrowserModule,

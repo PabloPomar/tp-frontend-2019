@@ -3,6 +3,7 @@ import {UsuarioModel} from '../../usuario.model';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import { ApiLoginService} from '../../api-login.service';
 import {Router, RouterModule, Routes} from '@angular/router';
+import {PersistencesService} from "../../persistences.service";
 
 @Component({
   selector: 'app-pagina-login',
@@ -29,7 +30,7 @@ export class PaginaLoginComponent implements OnInit {
     claveSeguridad: new FormControl('' , [Validators.required])
   });
 
-  constructor( protected apiLogin: ApiLoginService , private router: Router) {
+  constructor( protected apiLogin: ApiLoginService , private router: Router , protected apiPersistense: PersistencesService) {
     this.isUserLoggedIn = false;
   }
 
@@ -51,18 +52,25 @@ export class PaginaLoginComponent implements OnInit {
   setUserLoggedIn(user: UsuarioModel) {
     this.isUserLoggedIn = true;
     this.usserLogged = user;
+    this.apiPersistense.setLoggedInTrue();
+    this.apiPersistense.setCurrentUser(user.usuario);
+    /*
     localStorage.setItem('currentUser', user.usuario);
     localStorage.setItem('isLogedIn', 'true');
+    */
   }
 
   setOffUser() {
+    this.apiPersistense.setLoggedInFalse();
+    /*
     localStorage.removeItem('currentUser');
     localStorage.removeItem('isLogedIn');
+     */
   }
 
 
   getUserLoggedIn() {
-    return JSON.parse(localStorage.getItem('currentUser'));
+    return JSON.parse(this.apiPersistense.getUserName());
   }
 
   async onSubmit() {
@@ -84,9 +92,10 @@ export class PaginaLoginComponent implements OnInit {
                   this.setOffUser();
                   this.isAdmin = true;
                 } else {
-                  localStorage.setItem('tipoUser', data2);
+                  this.apiPersistense.setTipoUser(data2);
+                  //localStorage.setItem('tipoUser', data2);
                   // alert("Tipo de Usuario Logeado:" + localStorage.getItem('tipoUser'));
-                  alert('El usuario es correcto y se a logeado como:' + localStorage.getItem('currentUser'));
+                  alert('El usuario es correcto y se a logeado como:' + this.apiPersistense.getUserName());
                   this.router.navigate(['listado']);
                 }
               }
@@ -117,7 +126,8 @@ export class PaginaLoginComponent implements OnInit {
 
   setAdminUser() {
     this.setUserLoggedIn(this.usuario);
-    localStorage.setItem('tipoUser', 'admin');
+    this.apiPersistense.setTipoUserAsAdmin();
+    //localStorage.setItem('tipoUser', 'admin');
   }
 
   async onSubmitAdmin() {
@@ -138,7 +148,7 @@ export class PaginaLoginComponent implements OnInit {
                 if (data2 === 'admin') {
                   if (this.dobleClave === this.claveAdmin.toString()) {
                     this.setAdminUser();
-                    alert('El usuario admin es correcto y se a logeado como:' + localStorage.getItem('currentUser'));
+                    alert('El usuario admin es correcto y se a logeado como:' + this.apiPersistense.getUserName());
                     this.router.navigate(['listado']);
                   } else {
                     alert('La clave de confirmacion no es correcta');
