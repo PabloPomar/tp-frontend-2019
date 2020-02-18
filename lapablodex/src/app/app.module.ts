@@ -4,8 +4,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {ApiConnectionService} from './api-connection.service';
 import {HttpClientModule} from '@angular/common/http';
-import { ListaTestComponent } from './lista-test/lista-test.component';
-import { PostTestComponent } from './post-test/post-test.component';
 import {FormsModule} from '@angular/forms';
 import { PaginaPrincipalComponent } from './pagina-principal/pagina-principal.component';
 import { DexGifComponent } from './pagina-principal/dex-gif/dex-gif.component';
@@ -14,7 +12,6 @@ import {ReactiveFormsModule} from '@angular/forms';
 import { PokeTarjetaComponent } from './pagina-lista/poke-tarjeta/poke-tarjeta.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PokeDetalleComponent } from './poke-detalle/poke-detalle.component';
-import { RouterModule, Routes } from '@angular/router';
 import { RegistroDeUsuarioComponent } from './Systema-Login/registro-de-usuario/registro-de-usuario.component';
 import { PaginaLoginComponent } from './Systema-Login/pagina-login/pagina-login.component';
 import { LoginGoogleComponent } from './Systema-Login/pagina-login/login-google/login-google.component';
@@ -25,8 +22,6 @@ import { BotonesLoginComponent } from './botones-login/botones-login.component';
 @NgModule({
   declarations: [
     AppComponent,
-    ListaTestComponent,
-    PostTestComponent,
     PaginaPrincipalComponent,
     DexGifComponent,
     PaginaListaComponent,

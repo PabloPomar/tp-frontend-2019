@@ -4,6 +4,7 @@ import { PaginaListaComponent } from './pagina-lista.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import {PokeTarjetaComponent} from './poke-tarjeta/poke-tarjeta.component';
+import {BotonesLoginComponent} from '../botones-login/botones-login.component';
 
 describe('PaginaListaComponent', () => {
   let component: PaginaListaComponent;
@@ -12,7 +13,7 @@ describe('PaginaListaComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientModule, FormsModule, ReactiveFormsModule, RouterTestingModule],
-      declarations: [ PaginaListaComponent, PokeTarjetaComponent ]
+      declarations: [ PaginaListaComponent, PokeTarjetaComponent, BotonesLoginComponent ]
 
     })
     .compileComponents();

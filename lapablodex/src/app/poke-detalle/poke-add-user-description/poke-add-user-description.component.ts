@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {ApiAgregarUserDescriptionService} from '../../api-agregar-user-description.service';
 import {UserDescriptionModel2} from '../../userDescription2.model';
-import {PersistencesService} from "../../persistences.service";
-import {Router} from "@angular/router";
+import {PersistencesService} from '../../persistences.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-poke-add-user-description',
@@ -18,7 +18,8 @@ export class PokeAddUserDescriptionComponent implements OnInit {
   currentId: string;
 
 
-  constructor( private router: Router, protected apiUserDescription: ApiAgregarUserDescriptionService ,  protected apiPersistense: PersistencesService) {
+  constructor( private router: Router, protected apiUserDescription: ApiAgregarUserDescriptionService ,
+               protected apiPersistense: PersistencesService) {
     this.userDescription = new UserDescriptionModel2('nada', 'nadie' , 'Agrege su descripcion aqui', 'nada');
   }
 

@@ -4,8 +4,8 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class PersistencesService {
-  pokeId : string;
-  tipoUser : string;
+  pokeId: string;
+  tipoUser: string;
   currentUser: string;
   isLoggedIn: boolean;
 
@@ -21,14 +21,14 @@ export class PersistencesService {
   }
 
   setLoggedInTrue() {
-    this.isLoggedIn= true;
+    this.isLoggedIn = true;
   }
 
   setLoggedInFalse() {
-    this.isLoggedIn= false;
+    this.isLoggedIn = false;
   }
 
-  setTipoUser (tipo : string) {
+  setTipoUser(tipo: string) {
     this.tipoUser = tipo;
   }
 
@@ -37,18 +37,18 @@ export class PersistencesService {
   }
 
   setTipoUserAsUser() {
-   this.tipoUser = 'usuario'
+   this.tipoUser = 'usuario';
   }
 
-  setCurrentUser (nombre : string) {
+  setCurrentUser(nombre: string) {
     this.currentUser = nombre;
   }
 
-  getTipoUser () {
+  getTipoUser() {
     return this.tipoUser;
   }
 
-  getUserName () {
+  getUserName() {
     return this.currentUser;
   }
 

@@ -8,4 +8,5 @@ export class VotoModel {
     this.idpokemon = idpokemon;
     this.idusuario = idusuario;
     this.iddescipcion = iddescipcion;
-  }}
+  }
+}

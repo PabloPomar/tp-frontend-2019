@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
-import {throwError} from 'rxjs';
-import {ApiBaseService} from "./api-base.service";
+import {ApiBaseService} from './api-base.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ApiConnectionService extends  ApiBaseService{
+export class ApiConnectionService extends  ApiBaseService {
 
   constructor(protected http: HttpClient) {
     super();
@@ -21,15 +20,13 @@ export class ApiConnectionService extends  ApiBaseService{
   }
 
   postDescription(poke: any) {
-    console.log(poke);
     return this.http.post<any>(this.baseURL + '/APIpost/updateDescription2', poke)
-      .pipe(catchError(this.handleError));
+      .pipe(catchError(ApiBaseService.handleError));
   }
 
   postDescriptionById(poke: any) {
-    console.log(poke);
     return this.http.post<any>(this.baseURL + '/APIpost/updateDescription2', poke)
-      .pipe(catchError(this.handleError));
+      .pipe(catchError(ApiBaseService.handleError));
   }
 
   getEspecificPoke(name: string) {

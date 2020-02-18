@@ -1,18 +1,16 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
-import {throwError} from 'rxjs';
 import {VotoModel} from './voto.model';
-import {UsuarioModel} from './usuario.model';
-import {ApiBaseService} from "./api-base.service";
+import {ApiBaseService} from './api-base.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ApiVotosService extends ApiBaseService{
+export class ApiVotosService extends ApiBaseService {
 
   constructor(protected http: HttpClient) {
-    super();}
+    super(); }
 
   baseURL = 'http://localhost:3000';
 
@@ -21,9 +19,8 @@ export class ApiVotosService extends ApiBaseService{
   }
 
   AgregarVoto(voto: VotoModel) {
-    console.log(voto);
     return this.http.post<VotoModel>(this.baseURL + '/APIpost/agregarVoto', voto)
-      .pipe(catchError(this.handleError));
+      .pipe(catchError(ApiBaseService.handleError));
   }
 
 

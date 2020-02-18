@@ -1,13 +1,11 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {UserDescriptionModel} from '../../userDescription.model';
-import DateTimeFormat = Intl.DateTimeFormat;
-import {ActivatedRoute, Router} from '@angular/router';
+import {Router} from '@angular/router';
 import {ApiVotosService} from '../../api-votos.service';
 import {VotoModel} from '../../voto.model';
 import {ApiAgregarUserDescriptionService} from '../../api-agregar-user-description.service';
 import {UserDescriptionModel2} from '../../userDescription2.model';
-import {__await} from 'tslib';
-import {PersistencesService} from "../../persistences.service";
+import {PersistencesService} from '../../persistences.service';
 
 @Component({
   selector: 'app-poke-user-description',
@@ -15,6 +13,12 @@ import {PersistencesService} from "../../persistences.service";
   styleUrls: ['./poke-user-description.component.less']
 })
 export class PokeUserDescriptionComponent implements OnInit {
+
+  constructor(private router: Router, protected apiVotos: ApiVotosService,
+              protected apiDelete: ApiAgregarUserDescriptionService , protected apiPersistense: PersistencesService) {
+    this.voto = new VotoModel('nada', 'nada', 'nada');
+    this.deleter = new UserDescriptionModel2('nada', 'nadie' , 'Agrege su descripcion aqui', 'nada');
+  }
 
   @Input() userDescription: any;
 
@@ -28,9 +32,8 @@ export class PokeUserDescriptionComponent implements OnInit {
   private newVoto: VotoModel;
   deleter: UserDescriptionModel2;
 
-  constructor(private router: Router, protected apiVotos: ApiVotosService, protected apiDelete: ApiAgregarUserDescriptionService , protected apiPersistense: PersistencesService) {
-    this.voto = new VotoModel('nada', 'nada', 'nada');
-    this.deleter = new UserDescriptionModel2('nada', 'nadie' , 'Agrege su descripcion aqui', 'nada');
+  static stringAsDate(dateStr: string) {
+    return new Date(dateStr);
   }
 
   ngOnInit() {
@@ -41,13 +44,13 @@ export class PokeUserDescriptionComponent implements OnInit {
     this.description.descripcion = this.userDescription.descripcion;
     this.description.dislikes = this.userDescription.dislike;
     this.description.idDescripcion = this.userDescription.idDescripcion;
-    this.description.fecha = this.stringAsDate(this.userDescription.fecha);
+    this.description.fecha = PokeUserDescriptionComponent.stringAsDate(this.userDescription.fecha);
     this.deleter.usuario = this.userDescription.usuario;
     this.deleter.likes = this.userDescription.likes;
     this.deleter.descripcion = this.userDescription.descripcion;
     this.deleter.dislike = this.userDescription.dislike;
     this.deleter.idDescripcion = this.userDescription.idDescripcion;
-    this.deleter.fecha = this.stringAsDate(this.userDescription.fecha);
+    this.deleter.fecha = PokeUserDescriptionComponent.stringAsDate(this.userDescription.fecha);
     this.deleter.idPokemon = this.currentId;
     this.voto.idpokemon = this.currentId;
     this.voto.iddescipcion = this.description.idDescripcion;
@@ -55,21 +58,11 @@ export class PokeUserDescriptionComponent implements OnInit {
     this.yaVotoComprobar();
   }
 
-  stringAsDate(dateStr: string) {
-    return new Date(dateStr);
-  }
-
     readUserData() {
       this.tipoUser = this.apiPersistense.getTipoUser();
       this.logged = this.apiPersistense.getIslogedIn();
       this.username = this.apiPersistense.getUserName();
       this.currentId = this.apiPersistense.getPokeId();
-      /*
-      this.tipoUser = localStorage.getItem('tipoUser');
-      this.logged = localStorage.getItem('isLogedIn');
-      this.username = localStorage.getItem('currentUser');
-      this.currentId = localStorage.getItem('currentPokemonId');
-       */
     }
 
     aLogin() {
@@ -79,13 +72,7 @@ export class PokeUserDescriptionComponent implements OnInit {
   yaVotoComprobar() {
     this.apiVotos.yaVoto(this.voto).subscribe(
       (data) => {
-        if (data === true) {
-          this.YaVoto = true;
-          console.log('Ya voto en ' + this.description.idDescripcion + ':'  + this.YaVoto);
-        } else {
-          this.YaVoto = false;
-          console.log('Ya voto en ' + this.description.idDescripcion + ':'  + this.YaVoto);
-        }
+        this.YaVoto = data === true;
       } );
   }
 

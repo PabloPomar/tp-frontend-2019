@@ -1,16 +1,14 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
-import {throwError} from 'rxjs';
-import {VotoModel} from './voto.model';
 import {UserDescriptionModel2} from './userDescription2.model';
-import {ApiBaseService} from "./api-base.service";
+import {ApiBaseService} from './api-base.service';
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class ApiAgregarUserDescriptionService extends  ApiBaseService{
+export class ApiAgregarUserDescriptionService extends  ApiBaseService {
 
   constructor(protected http: HttpClient) {
     super();
@@ -23,9 +21,8 @@ export class ApiAgregarUserDescriptionService extends  ApiBaseService{
   }
 
   AgregarUserDescription(desc: UserDescriptionModel2) {
-    console.log(desc);
     return this.http.post<UserDescriptionModel2>(this.baseURL + '/APIpost/agregarUserDesc', desc)
-      .pipe(catchError(this.handleError));
+      .pipe(catchError(ApiBaseService.handleError));
   }
 
   proxNum(id: string) {
@@ -33,38 +30,15 @@ export class ApiAgregarUserDescriptionService extends  ApiBaseService{
   }
 
 
-
-  /*
-
-    BorrarUserDescription(desc: UserDescriptionModel2) {
-    console.log(desc);
-    return this.http.delete(this.baseURL +  '/APIdelete/BorrarUserDesc/' + desc.idPokemon + '/' + desc.idDescripcion)
-      .pipe(catchError(this.handleError));
-  }
-
-
-  BorrarVotos(desc: UserDescriptionModel2) {
-    console.log(desc);
-    return this.http.post<UserDescriptionModel2>(this.baseURL + '/APIpost/BorrarVotos', desc)
-      .pipe(catchError(this.handleError));
-  }
-
-  */
-
-
-
-
   BorrarUserDescription(desc: UserDescriptionModel2) {
-    console.log(desc);
     return this.http.post<UserDescriptionModel2>(this.baseURL + '/APIdelete/BorrarUserDesc', desc)
-      .pipe(catchError(this.handleError));
+      .pipe(catchError(ApiBaseService.handleError));
   }
 
 
   BorrarVotos(desc: UserDescriptionModel2) {
-    console.log(desc);
     return this.http.delete(this.baseURL + '/APIdelete/BorrarVotos/' + desc.idPokemon + '/' + desc.idDescripcion)
-      .pipe(catchError(this.handleError));
+      .pipe(catchError(ApiBaseService.handleError));
   }
 
 

@@ -5,6 +5,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import {HttpClientModule} from '@angular/common/http';
 import {PokeUserDescriptionComponent} from './poke-user-description/poke-user-description.component';
 import {PokeAddUserDescriptionComponent} from './poke-add-user-description/poke-add-user-description.component';
+import {BotonesLoginComponent} from '../botones-login/botones-login.component';
 
 describe('PokeDetalleComponent', () => {
   let component: PokeDetalleComponent;
@@ -14,7 +15,7 @@ describe('PokeDetalleComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [FormsModule, ReactiveFormsModule, RouterTestingModule, HttpClientModule],
-      declarations: [ PokeDetalleComponent, PokeUserDescriptionComponent, PokeAddUserDescriptionComponent ],
+      declarations: [ PokeDetalleComponent, PokeUserDescriptionComponent, PokeAddUserDescriptionComponent, BotonesLoginComponent],
     })
     .compileComponents();
   }));

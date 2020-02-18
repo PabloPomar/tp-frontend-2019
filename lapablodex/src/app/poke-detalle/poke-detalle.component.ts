@@ -1,9 +1,9 @@
-import {Component, Input, NgModule, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {ApiConnectionService} from '../api-connection.service';
-import {Router, RouterModule, Routes} from '@angular/router';
+import {Router} from '@angular/router';
 import {ApiAgregarUserDescriptionService} from '../api-agregar-user-description.service';
-import {PersistencesService} from "../persistences.service";
+import {PersistencesService} from '../persistences.service';
 
 
 @Component({
@@ -24,7 +24,8 @@ export class PokeDetalleComponent implements OnInit {
   yaPosteo: boolean;
 
   constructor(private route: ActivatedRoute , protected apiConnection: ApiConnectionService ,
-              private router: Router , protected apiUserDescription: ApiAgregarUserDescriptionService, protected apiPersistense: PersistencesService ) { }
+              private router: Router , protected apiUserDescription: ApiAgregarUserDescriptionService,
+              protected apiPersistense: PersistencesService ) { }
 
   ngOnInit() {
     this.yaPosteo = false;
@@ -36,8 +37,6 @@ export class PokeDetalleComponent implements OnInit {
       (data) => {
         this.pokemon = data;
         this.apiPersistense.setPokeId(this.pokemon.id);
-        //localStorage.setItem('currentPokemonId', this.pokemon.id);
-        // console.log("Current pokemon id:" + localStorage.getItem('currentPokemonId'));
         this.descripcionesUsuarios = this.pokemon.user_Description;
         this.sortByLikes();
         this.isLoaded = 1;
@@ -61,11 +60,6 @@ export class PokeDetalleComponent implements OnInit {
     this.tipoUser = this.apiPersistense.getTipoUser();
     this.logged = this.apiPersistense.getIslogedIn();
     this.username = this.apiPersistense.getUserName();
-    /*
-    this.tipoUser = localStorage.getItem('tipoUser');
-    this.logged = localStorage.getItem('isLogedIn');
-    this.username = localStorage.getItem('currentUser');
-     */
   }
 
 
@@ -90,13 +84,7 @@ export class PokeDetalleComponent implements OnInit {
   checkIfYaPosteo() {
     this.apiUserDescription.getYaPosteo(this.pokemon.id, this.username).subscribe(
       (data) => {
-        if (data === true) {
-          this.yaPosteo = true;
-          console.log('Ya posteo');
-        } else {
-          this.yaPosteo = false;
-          console.log('No posteo');
-        }
+        this.yaPosteo = data === true;
       } );
   }
 

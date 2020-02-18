@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ApiConnectionService} from '../api-connection.service';
-import {Router, RouterModule, Routes} from '@angular/router';
-import {PersistencesService} from "../persistences.service";
+import {PersistencesService} from '../persistences.service';
 
 @Component({
   selector: 'app-pagina-lista',
@@ -9,6 +8,8 @@ import {PersistencesService} from "../persistences.service";
   styleUrls: ['./pagina-lista.component.less']
 })
 export class PaginaListaComponent implements OnInit {
+
+  constructor(    protected apiConnection: ApiConnectionService,  protected apiPersistense: PersistencesService) { }
 
   sorterValue: string;
 
@@ -22,7 +23,9 @@ export class PaginaListaComponent implements OnInit {
 
   username: string;
 
-  constructor(    protected apiConnection: ApiConnectionService, private router: Router,  protected apiPersistense: PersistencesService) { }
+  static refresh(): void {
+    window.location.reload();
+  }
 
   ngOnInit() {
     this.readIfUserIsLoggedIn();
@@ -49,10 +52,6 @@ export class PaginaListaComponent implements OnInit {
     this.pokemons.sort((a, b) => parseFloat(a.id) - parseFloat(b.id));
   }
 
-  returnSortervalue() {
-    console.log(this.sorterValue);
-  }
-
   sortPage() {
     if (this.sorterValue === 'name') {
       this.sortByName();
@@ -60,10 +59,6 @@ export class PaginaListaComponent implements OnInit {
       this.sortById();
     }
 
-  }
-
-  refresh(): void {
-    window.location.reload();
   }
 
   searchName() {
@@ -88,10 +83,6 @@ export class PaginaListaComponent implements OnInit {
   readIfUserIsLoggedIn() {
     this.logged = this.apiPersistense.getIslogedIn();
     this.username = this.apiPersistense.getUserName();
-    /*
-    this.logged = localStorage.getItem('isLogedIn');
-    this.username = localStorage.getItem('currentUser');
-     */
   }
 
 }
